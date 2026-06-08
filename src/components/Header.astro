@@ -12,20 +12,17 @@ const { name = "Résumé", label, profiles = [] } = Astro.props;
       {label && <h2 class="site-header__title">{label}</h2>}
     </div>
 
-    {
-      profiles.length > 0 && (
-        <nav class="site-header__links" aria-label="Profiles">
-          {profiles.map(
-            (profile) =>
-              profile.url && (
-                <a class="site-header__link" href={profile.url} rel="me">
-                  {profile.network ?? profile.username ?? "Profile"}
-                </a>
-              ),
-          )}
-        </nav>
-      )
-    }
+    <nav class="site-header__links" aria-label="Résumé links">
+      <a class="site-header__link site-header__link--primary" href="/resume.pdf">View PDF</a>
+      {profiles.map(
+        (profile) =>
+          profile.url && (
+            <a class="site-header__link" href={profile.url} rel="me">
+              {profile.network ?? profile.username ?? "Profile"}
+            </a>
+          ),
+      )}
+    </nav>
   </div>
 </header>
 
@@ -79,10 +76,21 @@ const { name = "Résumé", label, profiles = [] } = Astro.props;
       transform 160ms ease;
   }
 
+  .site-header__link--primary {
+    border-color: var(--accent-6);
+    background: var(--accent-6);
+    color: white;
+  }
+
   .site-header__link:hover {
     border-color: var(--accent-7);
     color: var(--link);
     transform: translateY(-1px);
+  }
+
+  .site-header__link--primary:hover {
+    background: var(--accent-7);
+    color: white;
   }
 
   @media (min-width: 48rem) {

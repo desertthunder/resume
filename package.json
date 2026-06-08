@@ -15,10 +15,14 @@
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
     "@fontsource/ibm-plex-sans": "^5.2.8",
     "@fontsource/ibm-plex-serif": "^5.2.7",
-    "astro": "^6.4.4"
+    "@react-pdf/renderer": "^4.5.1",
+    "astro": "^6.4.4",
+    "react": "^19.2.7"
   },
   "devDependencies": {
     "@iconify-json/ri": "^1.2.10",
+    "@types/node": "^25.9.2",
+    "@types/react": "^19.2.17",
     "@unocss/astro": "^66.7.0",
     "@unocss/preset-icons": "^66.7.0",
     "prettier": "3.8.1",
