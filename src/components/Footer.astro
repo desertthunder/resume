@@ -1,4 +1,6 @@
 ---
+import Icon from "./Icon.astro";
+
 type Profile = { network?: string; username?: string; url?: string };
 type Props = { name?: string; profiles?: Profile[] };
 
@@ -18,7 +20,7 @@ const year = new Date().getFullYear();
                   <span class="sr-only">
                     {name} on {profile.network}
                   </span>
-                  {(profile.network ?? profile.username ?? "•").slice(0, 1)}
+                  {profile.network?.toLowerCase() === "github" ? <Icon name="github" /> : (profile.network ?? profile.username ?? "•").slice(0, 1)}
                 </a>
               ),
           )}
@@ -36,7 +38,7 @@ const year = new Date().getFullYear();
 <style>
   .site-footer {
     border-top: 1px solid var(--border);
-    background: var(--surface-muted);
+    background: color-mix(in srgb, var(--surface) 72%, transparent);
     padding-block: var(--space-12);
     text-align: center;
   }

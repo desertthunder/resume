@@ -36,18 +36,10 @@ const { work = [] } = Astro.props;
                 )}
               </h3>
 
-              <ul class="timeline">
-                <li class="timeline__item">
-                  <div class="timeline__rail" aria-hidden="true">
-                    <span class="timeline__dot" />
-                    <span class="timeline__line" />
-                  </div>
-                  <div class="timeline__body">
-                    <div class="timeline__position">{job.position}</div>
-                    <div class="timeline__dates">{formatResumeDateRange(job.startDate, job.endDate)}</div>
-                  </div>
-                </li>
-              </ul>
+              <div class="role-row">
+                <div class="role-row__title">{job.position}</div>
+                <div class="role-row__dates">{formatResumeDateRange(job.startDate, job.endDate)}</div>
+              </div>
 
               {(job.summary || job.highlights?.length) && (
                 <div class="prose">
@@ -106,64 +98,25 @@ const { work = [] } = Astro.props;
     color: var(--link);
   }
 
-  .timeline {
-    display: grid;
-    gap: 0;
-    list-style: none;
-  }
-
-  .timeline__item {
+  .role-row {
     display: flex;
-    gap: var(--space-6);
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-6);
   }
 
-  .timeline__rail {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .timeline__dot {
-    width: 0.5rem;
-    height: 0.5rem;
-    flex: none;
-    border-radius: 999px;
-    background: var(--accent-9);
-    margin-top: 0.38rem;
-  }
-
-  .timeline__line {
-    width: 2px;
-    height: 100%;
-    border-radius: 999px;
-    background: var(--accent-3);
-  }
-
-  .timeline__item:last-child .timeline__line {
-    display: none;
-  }
-
-  .timeline__body {
-    display: grid;
-    gap: var(--space-3);
-    padding-bottom: var(--space-4);
-  }
-
-  .timeline__item:last-child .timeline__body {
-    padding-bottom: 0;
-  }
-
-  .timeline__position {
+  .role-row__title {
     font-size: var(--text-lg);
     font-weight: 800;
     line-height: var(--leading-tight);
   }
 
-  .timeline__dates {
+  .role-row__dates {
     color: var(--text-muted);
     font-size: var(--text-sm);
     letter-spacing: 0.03em;
+    white-space: nowrap;
   }
 
   .prose {

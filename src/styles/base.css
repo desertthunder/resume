@@ -59,7 +59,7 @@ h5,
 h6 {
   color: var(--text);
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: 600;
   line-height: var(--leading-tight);
   text-wrap: balance;
 }

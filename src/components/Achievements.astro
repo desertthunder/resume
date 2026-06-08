@@ -1,7 +1,7 @@
 ---
-import { formatResumeDate, formatResumeDateRange } from '../utils/date';
-import Icon from './Icon.astro';
-import SectionHeading from './SectionHeading.astro';
+import { formatResumeDate, formatResumeDateRange } from "../utils/date";
+import Icon from "./Icon.astro";
+import SectionHeading from "./SectionHeading.astro";
 
 type Education = {
   institution?: string;
@@ -12,58 +12,58 @@ type Education = {
   url?: string;
 };
 
-type Award = {
-  title?: string;
-  date?: string;
-  awarder?: string;
-  summary?: string;
-};
-
-interface Props {
-  education?: Education[];
-  awards?: Award[];
-}
+type Award = { title?: string; date?: string; awarder?: string; summary?: string };
+type Props = { education?: Education[]; awards?: Award[] };
 
 const { education = [], awards = [] } = Astro.props;
 const hasItems = education.length > 0 || awards.length > 0;
 ---
 
-{hasItems && (
-  <section class="resume-section" aria-labelledby="achievements-heading">
-    <div class="container resume-section__inner">
-      <SectionHeading class="resume-section__heading" icon="academic" level={2} text="Achievements" />
+{
+  hasItems && (
+    <section class="resume-section" aria-labelledby="achievements-heading">
+      <div class="container resume-section__inner">
+        <SectionHeading class="resume-section__heading" icon="academic" level={2} text="Education" />
 
-      <div class="resume-section__items">
-        {education.map((item) => (
-          <article class="detail-panel">
-            <div class="detail-panel__header">
-              <h3>{item.studyType}{item.area ? `, ${item.area}` : ''}</h3>
-              <div class="detail-panel__meta">
-                <Icon name="academic" />
-                {item.institution}{item.startDate ? `, ${item.endDate ? formatResumeDateRange(item.startDate, item.endDate) : formatResumeDate(item.startDate)}` : ''}
+        <div class="resume-section__items">
+          {education.map((item) => (
+            <article class="detail-panel">
+              <div class="detail-panel__header">
+                <h3>
+                  {item.studyType}
+                  {item.area ? `, ${item.area}` : ""}
+                </h3>
+                <div class="detail-panel__meta">
+                  <Icon name="academic" />
+                  {item.institution}
+                  {item.startDate
+                    ? `, ${item.endDate ? formatResumeDateRange(item.startDate, item.endDate) : formatResumeDate(item.startDate)}`
+                    : ""}
+                </div>
               </div>
-            </div>
-            <hr class="resume-separator" />
-          </article>
-        ))}
+              <hr class="resume-separator" />
+            </article>
+          ))}
 
-        {awards.map((award) => (
-          <article class="detail-panel">
-            <div class="detail-panel__header">
-              <h3>{award.title}</h3>
-              <div class="detail-panel__meta">
-                <Icon name="academic" />
-                {award.awarder}{award.date ? `, ${formatResumeDate(award.date)}` : ''}
+          {awards.map((award) => (
+            <article class="detail-panel">
+              <div class="detail-panel__header">
+                <h3>{award.title}</h3>
+                <div class="detail-panel__meta">
+                  <Icon name="academic" />
+                  {award.awarder}
+                  {award.date ? `, ${formatResumeDate(award.date)}` : ""}
+                </div>
               </div>
-            </div>
-            {award.summary && <p>{award.summary}</p>}
-            <hr class="resume-separator" />
-          </article>
-        ))}
+              {award.summary && <p>{award.summary}</p>}
+              <hr class="resume-separator" />
+            </article>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-)}
+    </section>
+  )
+}
 
 <style>
   .resume-section {

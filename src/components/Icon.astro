@@ -1,0 +1,29 @@
+---
+type IconName = 'user' | 'contact' | 'check' | 'briefcase' | 'academic' | 'paint' | 'link' | 'github';
+
+interface Props {
+  name: IconName;
+  label?: string;
+  class?: string;
+}
+
+const { name, label, class: className = '' } = Astro.props;
+
+const icons: Record<IconName, string> = {
+  user: 'i-ri-user-fill',
+  contact: 'i-ri-contacts-book-2-fill',
+  check: 'i-ri-check-fill',
+  briefcase: 'i-ri-briefcase-4-fill',
+  academic: 'i-ri-graduation-cap-fill',
+  paint: 'i-ri-palette-fill',
+  link: 'i-ri-link',
+  github: 'i-ri-github-fill',
+};
+---
+
+<span
+  class:list={['inline-icon', icons[name], className]}
+  aria-hidden={label ? undefined : 'true'}
+  aria-label={label}
+  role={label ? 'img' : undefined}
+></span>

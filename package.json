@@ -18,7 +18,11 @@
     "astro": "^6.4.4"
   },
   "devDependencies": {
+    "@iconify-json/ri": "^1.2.10",
+    "@unocss/astro": "^66.7.0",
+    "@unocss/preset-icons": "^66.7.0",
     "prettier": "3.8.1",
-    "prettier-plugin-astro": "0.14.1"
+    "prettier-plugin-astro": "0.14.1",
+    "unocss": "^66.7.0"
   }
 }
