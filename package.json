@@ -12,6 +12,12 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource-variable/albert-sans": "^5.2.8",
+    "@fontsource-variable/jetbrains-mono": "^5.2.8",
     "astro": "^6.4.4"
+  },
+  "devDependencies": {
+    "prettier": "3.8.1",
+    "prettier-plugin-astro": "0.14.1"
   }
 }
