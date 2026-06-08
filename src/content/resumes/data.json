@@ -2,9 +2,9 @@
   "basics": {
     "name": "Owais Jamil",
     "label": "Software Engineer",
-    "email": "desertthunder.dev@gmail.com",
+    "email": "me@desertthunder.dev",
     "phone": "(512) 666-1737",
-    "url": "https://github.com/desertthunder",
+    "url": "https://desertthunder.dev",
     "summary": "Senior Software Engineer",
     "location": { "city": "Austin", "region": "TX", "countryCode": "US" },
     "profiles": [
@@ -82,13 +82,18 @@
     }
   ],
   "skills": [
-    { "name": "Languages", "keywords": ["Python", "TypeScript", "JavaScript", "Ruby", "Golang", "SQL", "Rust"] },
+    {
+      "name": "Languages",
+      "keywords": ["Python", "TypeScript", "JavaScript", "Ruby", "Golang", "SQL", "Rust", "Dart"]
+    },
     {
       "name": "Technologies",
       "keywords": [
         "Django",
         "React",
         "React Native",
+        "Flutter",
+        "Svelte",
         "Vue",
         "Rails",
         "Docker",
@@ -99,7 +104,7 @@
     },
     {
       "name": "Professional Interests",
-      "keywords": ["Linux", "Software Architecture", "R", "F#", "OCaml", "Mobile Development", "Svelte"]
+      "keywords": ["Linux", "Software Architecture", "R", "F#", "OCaml", "Mobile Development", "Solid.js", "Compilers"]
     }
   ],
   "projects": [
@@ -116,7 +121,7 @@
     {
       "name": "Beacon",
       "description": "Python Type Checker and Language Server",
-      "url": "https://github.com/stormlightlabs/beacon",
+      "url": "https://beacon.stormlightlabs.org",
       "highlights": [
         "Architected Rust-based LSP implementation with Hindley-Milner type inference engine",
         "Implemented comprehensive code intelligence including real-time diagnostics and type narrowing via control flow analysis",
@@ -125,9 +130,9 @@
       ]
     },
     {
-      "name": "Baseball API",
+      "name": "Big Fly",
       "description": "Comprehensive Baseball Statistics REST API",
-      "url": "https://github.com/stormlightlabs/baseball",
+      "url": "https://bigfly.tech",
       "highlights": [
         "Built RESTful API with Go and PostgreSQL serving historical data from Lahman Database and Retrosheet",
         "Implemented advanced analytics including win probability calculations from 2,143 unique game states",
@@ -138,7 +143,7 @@
     {
       "name": "VoltX.JS",
       "description": "Lightweight Reactive Framework",
-      "url": "https://github.com/stormlightlabs/volt",
+      "url": "https://stormlightlabs.github.io/volt",
       "highlights": [
         "Architected signal-based reactive framework (<15KB) enabling declarative HTML-driven UIs without virtual DOM",
         "Implemented eval-free recursive descent expression parser with sandboxed execution",
