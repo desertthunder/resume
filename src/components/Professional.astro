@@ -57,14 +57,22 @@ const { work = [] } = Astro.props;
 
 <style>
   .resume-section {
+    width: min(calc(100% - 2.5rem), var(--container));
+    margin-inline: auto;
     border: 1px solid var(--border);
-    background: var(--surface-muted);
+    background: var(--section-professional);
     padding-block: var(--space-12);
   }
 
   .resume-section__inner {
     display: grid;
     gap: var(--space-8);
+  }
+
+  @media (max-width: 40rem) {
+    .resume-section {
+      width: 100%;
+    }
   }
 
   :global(.resume-section__heading) {

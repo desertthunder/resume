@@ -9,6 +9,9 @@ const iconClasses = [
   "i-ri-palette-fill",
   "i-ri-link",
   "i-ri-github-fill",
+  "i-ri-sun-fill",
+  "i-ri-moon-fill",
+  "i-ri-linkedin-fill",
 ];
 
 export default defineConfig({

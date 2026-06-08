@@ -1,10 +1,10 @@
 ---
-import type { ResumeProfile } from '../types/resume';
+import type { ResumeProfile } from "../types/resume";
 import Icon from "./Icon.astro";
 
-type Props = { name?: string; profiles?: ResumeProfile[] };
+type Props = { name?: string; profiles?: ResumeProfile[]; website?: string };
 
-const { name = "Résumé", profiles = [] } = Astro.props;
+const { name = "Résumé", profiles = [], website = "https://desertthunder.dev" } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
@@ -20,7 +20,13 @@ const year = new Date().getFullYear();
                   <span class="sr-only">
                     {name} on {profile.network}
                   </span>
-                  {profile.network?.toLowerCase() === "github" ? <Icon name="github" /> : (profile.network ?? profile.username ?? "•").slice(0, 1)}
+                  {profile.network?.toLowerCase() === "github" ? (
+                    <Icon name="github" />
+                  ) : profile.network?.toLowerCase() === "linkedin" ? (
+                    <Icon name="linkedin" />
+                  ) : (
+                    (profile.network ?? profile.username ?? "•").slice(0, 1)
+                  )}
                 </a>
               ),
           )}
@@ -29,8 +35,8 @@ const year = new Date().getFullYear();
     }
 
     <div>
-      <div>Copyright © {year} {name}</div>
-      <div class="site-footer__small">This résumé was generated with Astro.</div>
+      <div>Copyright © {year} <a href={website} target="_blank">{name}</a></div>
+      <div class="site-footer__small">Built with ⚡️ & Astro in Austin, TX</div>
     </div>
   </div>
 </footer>

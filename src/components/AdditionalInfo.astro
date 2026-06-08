@@ -50,13 +50,21 @@ const { projects = [] } = Astro.props;
 
 <style>
   .resume-projects-section {
-    border-block: 1px solid var(--border);
-    background: var(--surface-muted);
+    width: min(calc(100% - 2.5rem), var(--container));
+    margin-inline: auto;
+    border: 1px solid var(--border);
+    background: var(--section-projects);
   }
 
   .resume-card {
     display: grid;
     gap: var(--space-4);
+  }
+
+  @media (max-width: 40rem) {
+    .resume-projects-section {
+      width: 100%;
+    }
   }
 
   .resume-projects {

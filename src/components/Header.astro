@@ -1,5 +1,6 @@
 ---
-import type { ResumeProfile } from '../types/resume';
+import type { ResumeProfile } from "../types/resume";
+import Icon from "./Icon.astro";
 
 type Props = { name?: string; label?: string; profiles?: ResumeProfile[] };
 const { name = "Résumé", label, profiles = [] } = Astro.props;
@@ -13,18 +14,54 @@ const { name = "Résumé", label, profiles = [] } = Astro.props;
     </div>
 
     <nav class="site-header__links" aria-label="Résumé links">
-      <a class="site-header__link site-header__link--primary" href="/resume.pdf">View PDF</a>
-      {profiles.map(
-        (profile) =>
-          profile.url && (
-            <a class="site-header__link" href={profile.url} rel="me">
-              {profile.network ?? profile.username ?? "Profile"}
-            </a>
-          ),
-      )}
+      <button
+        class="site-header__link site-header__theme-toggle"
+        type="button"
+        aria-label="Toggle dark mode"
+        data-theme-toggle>
+        <Icon class="site-header__theme-icon" name="sun" data-theme-icon="sun" hidden />
+        <Icon class="site-header__theme-icon" name="moon" data-theme-icon="moon" />
+      </button>
+      <a class="site-header__link site-header__link--primary" href="/resume.pdf" target="_blank">View PDF</a>
+      <a class="site-header__link" href="https://github.com/desertthunder/resume" target="_blank"> Source </a>
     </nav>
   </div>
 </header>
+
+<script>
+  const root = document.documentElement;
+  const toggle = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
+  const sunIcon = document.querySelector<HTMLElement>('[data-theme-icon="sun"]');
+  const moonIcon = document.querySelector<HTMLElement>('[data-theme-icon="moon"]');
+  const storageKey = "resumania-theme";
+
+  const getSystemTheme = () => (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const getStoredTheme = () => localStorage.getItem(storageKey) as "light" | "dark" | null;
+  const getCurrentTheme = () =>
+    root.dataset.theme === "dark"
+      ? "dark"
+      : root.dataset.theme === "light"
+        ? "light"
+        : (getStoredTheme() ?? getSystemTheme());
+
+  const applyTheme = (theme: "light" | "dark") => {
+    root.dataset.theme = theme;
+    localStorage.setItem(storageKey, theme);
+    toggle?.setAttribute("data-theme", theme);
+    toggle?.setAttribute("aria-label", theme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+
+    if (sunIcon && moonIcon) {
+      sunIcon.hidden = theme !== "dark";
+      moonIcon.hidden = theme !== "light";
+    }
+  };
+
+  applyTheme(getStoredTheme() ?? getSystemTheme());
+
+  toggle?.addEventListener("click", () => {
+    applyTheme(getCurrentTheme() === "dark" ? "light" : "dark");
+  });
+</script>
 
 <style>
   .site-header {
@@ -69,11 +106,22 @@ const { name = "Résumé", label, profiles = [] } = Astro.props;
     color: var(--text-muted);
     font-weight: 700;
     padding: var(--space-2) var(--space-4);
+    cursor: pointer;
     text-decoration: none;
     transition:
       border-color 160ms ease,
       color 160ms ease,
       transform 160ms ease;
+  }
+
+  .site-header__theme-toggle {
+    width: 2.5rem;
+    height: 1.5rem;
+    padding-inline: var(--space-2);
+  }
+
+  :global(.site-header__theme-icon[hidden]) {
+    display: none !important;
   }
 
   .site-header__link--primary {

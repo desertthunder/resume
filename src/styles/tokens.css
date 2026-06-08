@@ -1,0 +1,177 @@
+:root {
+  color-scheme: light;
+
+  --neutral-1: #ffffff;
+  --neutral-2: #f4f4f4;
+  --neutral-3: #e0e0e0;
+  --neutral-4: #c6c6c6;
+  --neutral-5: #a8a8a8;
+  --neutral-6: #8d8d8d;
+  --neutral-7: #6f6f6f;
+  --neutral-8: #525252;
+  --neutral-9: #393939;
+  --neutral-10: #262626;
+  --neutral-11: #161616;
+
+  --oxocarbon-blue: #33b1ff;
+  --oxocarbon-cyan: #3ddbd9;
+  --oxocarbon-purple: #be95ff;
+  --oxocarbon-magenta: #ff7eb6;
+  --oxocarbon-green: #42be65;
+
+  --accent-1: #edf8ff;
+  --accent-2: #d6efff;
+  --accent-3: #a6ddff;
+  --accent-4: #78c7ff;
+  --accent-5: #52bbff;
+  --accent-6: var(--oxocarbon-blue);
+  --accent-7: #1192e8;
+  --accent-8: #0f62fe;
+  --accent-9: #0043ce;
+  --accent-10: #002d9c;
+  --accent-11: #001d6c;
+
+  --surface: var(--neutral-1);
+  --surface-muted: var(--neutral-2);
+  --surface-raised: #ffffff;
+  --border: var(--neutral-4);
+  --border-strong: var(--neutral-5);
+  --text: var(--neutral-11);
+  --text-muted: var(--neutral-8);
+  --text-subtle: var(--neutral-7);
+  --link: var(--accent-8);
+  --link-decoration: var(--accent-5);
+  --selection-bg: var(--accent-8);
+  --selection-text: var(--neutral-1);
+  --section-overview: var(--surface);
+  --section-professional: var(--surface-muted);
+  --section-education: var(--surface-muted);
+  --section-projects: var(--surface-muted);
+
+  --font-heading: "Recursive Variable", Georgia, serif;
+  --font-body: "Atkinson Hyperlegible Next Variable", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: clamp(1.25rem, 1.1rem + 0.65vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.25rem + 1vw, 1.875rem);
+  --text-3xl: clamp(1.875rem, 1.55rem + 1.3vw, 2.25rem);
+  --text-4xl: clamp(2.25rem, 1.75rem + 2vw, 3rem);
+
+  --leading-tight: 1.08;
+  --leading-snug: 1.2;
+  --leading-normal: 1.55;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  --shadow-md: 0 18px 45px rgb(15 23 42 / 0.08), 0 2px 8px rgb(15 23 42 / 0.06);
+  --container: 72rem;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --neutral-11: #f2f4f8;
+  --neutral-10: #dde1e6;
+  --neutral-9: #c1c7cd;
+  --neutral-8: #8d8d8d;
+  --neutral-7: #6f6f6f;
+  --neutral-6: #525252;
+  --neutral-5: #393939;
+  --neutral-4: #262626;
+  --neutral-3: #1f1f1f;
+  --neutral-2: #161616;
+  --neutral-1: #0f0f0f;
+
+  --accent-11: #edf8ff;
+  --accent-10: #d6efff;
+  --accent-9: #a6ddff;
+  --accent-8: #78c7ff;
+  --accent-7: #52bbff;
+  --accent-6: var(--oxocarbon-blue);
+  --accent-5: #1192e8;
+  --accent-4: #0f62fe;
+  --accent-3: #0043ce;
+  --accent-2: #002d9c;
+  --accent-1: #001d6c;
+
+  --surface: var(--neutral-1);
+  --surface-muted: var(--neutral-2);
+  --surface-raised: var(--neutral-2);
+  --border: var(--neutral-4);
+  --border-strong: var(--neutral-5);
+  --text: var(--neutral-11);
+  --text-muted: var(--neutral-9);
+  --text-subtle: var(--neutral-8);
+  --link: var(--accent-10);
+  --link-decoration: var(--accent-8);
+  --selection-bg: var(--accent-6);
+  --selection-text: var(--neutral-1);
+  --section-overview: var(--surface);
+  --section-professional: var(--surface-muted);
+  --section-education: var(--surface-muted);
+  --section-projects: var(--surface-muted);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --neutral-11: #f2f4f8;
+    --neutral-10: #dde1e6;
+    --neutral-9: #c1c7cd;
+    --neutral-8: #8d8d8d;
+    --neutral-7: #6f6f6f;
+    --neutral-6: #525252;
+    --neutral-5: #393939;
+    --neutral-4: #262626;
+    --neutral-3: #1f1f1f;
+    --neutral-2: #161616;
+    --neutral-1: #0f0f0f;
+
+    --accent-11: #edf8ff;
+    --accent-10: #d6efff;
+    --accent-9: #a6ddff;
+    --accent-8: #78c7ff;
+    --accent-7: #52bbff;
+    --accent-6: var(--oxocarbon-blue);
+    --accent-5: #1192e8;
+    --accent-4: #0f62fe;
+    --accent-3: #0043ce;
+    --accent-2: #002d9c;
+    --accent-1: #001d6c;
+
+    --surface: var(--neutral-1);
+    --surface-muted: var(--neutral-2);
+    --surface-raised: var(--neutral-2);
+    --border: var(--neutral-4);
+    --border-strong: var(--neutral-5);
+    --text: var(--neutral-11);
+    --text-muted: var(--neutral-9);
+    --text-subtle: var(--neutral-8);
+    --link: var(--accent-10);
+    --link-decoration: var(--accent-8);
+    --selection-bg: var(--accent-6);
+    --selection-text: var(--neutral-1);
+    --section-overview: var(--surface);
+    --section-professional: var(--surface-muted);
+    --section-education: var(--surface-muted);
+    --section-projects: var(--surface-muted);
+  }
+}

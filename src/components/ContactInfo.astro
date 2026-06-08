@@ -1,5 +1,5 @@
 ---
-import type { ResumeLocation, ResumeProfile } from '../types/resume';
+import type { ResumeLocation, ResumeProfile } from "../types/resume";
 import SectionHeading from "./SectionHeading.astro";
 
 type Props = { email?: string; phone?: string; url?: string; location?: ResumeLocation; profiles?: ResumeProfile[] };
@@ -47,18 +47,6 @@ const locationText = [location?.city, location?.region, location?.countryCode].f
             {url.replace(/^https?:\/\//, "")}
           </a>
         </li>
-      )
-    }
-    {
-      profiles.map(
-        (profile) =>
-          profile.url && (
-            <li>
-              <a class="text-link" href={profile.url}>
-                {profile.network ?? profile.username ?? "Profile"}
-              </a>
-            </li>
-          ),
       )
     }
   </ul>
