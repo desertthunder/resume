@@ -1,0 +1,156 @@
+{
+  "basics": {
+    "name": "Owais Jamil",
+    "label": "Software Engineer",
+    "email": "desertthunder.dev@gmail.com",
+    "phone": "(512) 666-1737",
+    "url": "https://github.com/desertthunder",
+    "location": { "city": "Austin", "region": "TX", "countryCode": "US" },
+    "profiles": [{ "network": "GitHub", "username": "desertthunder", "url": "https://github.com/desertthunder" }]
+  },
+  "work": [
+    {
+      "name": "Stormlight Labs",
+      "position": "Founder and Lead Software Engineer",
+      "startDate": "2024",
+      "summary": "Lead Engineer of a mental health & open-source focused startup, architecting scalable systems and leading development from concept to production.",
+      "highlights": [
+        "Translated complex technical and product requirements into intuitive, performant, and maintainable software solutions grounded in research and user feedback",
+        "Developed and optimized multi-platform applications and open-source libraries using Svelte, Rust, Go, and Flutter, applying modern software design patterns, concurrency models, and profiling for high reliability and performance"
+      ]
+    },
+    {
+      "name": "Edlink",
+      "position": "Senior Software Engineer",
+      "startDate": "2023-05",
+      "endDate": "2024-07",
+      "summary": "Technical lead and project manager for Flow, a data pipeline connecting LMS to SIS providers for schools.",
+      "highlights": [
+        "Adapted new data model to the API, as well as connectors for new integrations",
+        "Built and designed novel system architecture around PubSub and BigQuery, and Cloud functions",
+        "NestJS (with TypeScript) and Postgres in a Kubernetes cluster on GCP with Redis. Dashboard built with Vue"
+      ]
+    },
+    {
+      "name": "CampusOptics",
+      "position": "Software Engineer",
+      "startDate": "2022-03",
+      "endDate": "2023-03",
+      "summary": "Independently gathered requirements from customers and management to develop new features for a higher education Environmental Health and Safety SaaS.",
+      "highlights": [
+        "Built features for a React Native application while adding endpoints to the internal API",
+        "Complete Stack: Redis for Sidekiq, Ruby on Rails monolith, and Postgres deployed to AWS Elastic Container Service"
+      ]
+    },
+    {
+      "name": "Texas Advanced Computing Center",
+      "position": "Software Engineer",
+      "startDate": "2019-10",
+      "endDate": "2022-03",
+      "summary": "Architected the Frontera User Portal, the first implementation of the Core Experience Portal v2.",
+      "highlights": [
+        "Built with React, Django, and Postgres",
+        "Developed SEO optimization strategy and publication pipeline update on DesignSafe-CI",
+        "Advocated for and improved internal testing practices and implemented Pytest for Core V2"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Texas at Austin",
+      "studyType": "Master of Science",
+      "area": "Computer Science",
+      "startDate": "2022"
+    },
+    {
+      "institution": "University of Texas at Austin",
+      "studyType": "Bachelor of Science",
+      "area": "Microbiology",
+      "startDate": "2015",
+      "endDate": "2017"
+    },
+    {
+      "institution": "University of Texas at Austin",
+      "studyType": "Bachelor of Science",
+      "area": "Biochemistry",
+      "startDate": "2011",
+      "endDate": "2015"
+    }
+  ],
+  "skills": [
+    { "name": "Languages", "keywords": ["Python", "TypeScript", "JavaScript", "Ruby", "Golang", "SQL", "Rust"] },
+    {
+      "name": "Technologies",
+      "keywords": [
+        "Django",
+        "React",
+        "React Native",
+        "Vue",
+        "Rails",
+        "Docker",
+        "Kubernetes",
+        "ElasticSearch",
+        "Postgres"
+      ]
+    },
+    {
+      "name": "Professional Interests",
+      "keywords": ["Linux", "Software Architecture", "R", "F#", "OCaml", "Mobile Development", "Svelte"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Volkara",
+      "description": "Cross-platform ADHD focused productivity app",
+      "url": "https://volkara.stormlightlabs.org",
+      "highlights": [
+        "Deployed a local-first SvelteKit application using PGlite and Drizzle, achieving sub-100 ms offline UX with deterministic data consistency",
+        "Designed and implemented a premium sync engine with queued operations, SHA-256 diffing, and a network-aware worker",
+        "Unified observability across web and worker contexts via session-scoped & GDPR compliant telemetry"
+      ]
+    },
+    {
+      "name": "Beacon",
+      "description": "Python Type Checker and Language Server",
+      "url": "https://github.com/stormlightlabs/beacon",
+      "highlights": [
+        "Architected Rust-based LSP implementation with Hindley-Milner type inference engine",
+        "Implemented comprehensive code intelligence including real-time diagnostics and type narrowing via control flow analysis",
+        "Built refactoring suite with workspace-wide renaming validation and automated quick fixes",
+        "Designed incremental analysis architecture with multi-layer caching supporting VS Code, Zed, Neovim, and Helix"
+      ]
+    },
+    {
+      "name": "Baseball API",
+      "description": "Comprehensive Baseball Statistics REST API",
+      "url": "https://github.com/stormlightlabs/baseball",
+      "highlights": [
+        "Built RESTful API with Go and PostgreSQL serving historical data from Lahman Database and Retrosheet",
+        "Implemented advanced analytics including win probability calculations from 2,143 unique game states",
+        "Designed trigger-maintained search vectors with GIN/trigram indexes enabling sub-millisecond queries",
+        "Architected ETL pipeline with materialized views and comprehensive Swagger/OpenAPI documentation"
+      ]
+    },
+    {
+      "name": "VoltX.JS",
+      "description": "Lightweight Reactive Framework",
+      "url": "https://github.com/stormlightlabs/volt",
+      "highlights": [
+        "Architected signal-based reactive framework (<15KB) enabling declarative HTML-driven UIs without virtual DOM",
+        "Implemented eval-free recursive descent expression parser with sandboxed execution",
+        "Built SSR/hydration layer with scope serialization and plugin architecture",
+        "Dependency-free TypeScript codebase maintained with 95% test coverage"
+      ]
+    },
+    {
+      "name": "Noteleaf",
+      "description": "Unified Personal Productivity CLI",
+      "url": "https://github.com/stormlightlabs/noteleaf",
+      "highlights": [
+        "Architected terminal-native productivity system combining task management, note-taking, and media tracking",
+        "Implemented repository pattern with SQLite persistence and Cobra CLI framework",
+        "Built article parser with Colly and goquery for web scraping"
+      ]
+    }
+  ]
+}
