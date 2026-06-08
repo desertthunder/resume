@@ -6,8 +6,12 @@ type Props = { name?: string; label?: string; profiles?: ResumeProfile[] };
 const { name = "Résumé", label, profiles = [] } = Astro.props;
 ---
 
-<header class="site-header">
+<header class="site-header" data-collapsible-header>
   <div class="container site-header__inner">
+    <div class="site-header__avatar" aria-hidden="true">
+      <img src="/avatar.jpg" alt="" width="328" height="328" />
+    </div>
+
     <div class="site-header__identity">
       <h1>{name}</h1>
       {label && <h2 class="site-header__title">{label}</h2>}
@@ -34,6 +38,9 @@ const { name = "Résumé", label, profiles = [] } = Astro.props;
   const sunIcon = document.querySelector<HTMLElement>('[data-theme-icon="sun"]');
   const moonIcon = document.querySelector<HTMLElement>('[data-theme-icon="moon"]');
   const storageKey = "resumania-theme";
+  const header = document.querySelector<HTMLElement>("[data-collapsible-header]");
+  const collapseAt = 120;
+  const expandAt = 40;
 
   const getSystemTheme = () => (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
   const getStoredTheme = () => localStorage.getItem(storageKey) as "light" | "dark" | null;
@@ -61,38 +68,80 @@ const { name = "Résumé", label, profiles = [] } = Astro.props;
   toggle?.addEventListener("click", () => {
     applyTheme(getCurrentTheme() === "dark" ? "light" : "dark");
   });
+
+  const syncHeaderState = () => {
+    if (!header) return;
+    const isCollapsed = header.hasAttribute("data-collapsed");
+
+    if (!isCollapsed && window.scrollY > collapseAt) {
+      header.setAttribute("data-collapsed", "");
+    } else if (isCollapsed && window.scrollY < expandAt) {
+      header.removeAttribute("data-collapsed");
+    }
+  };
+
+  syncHeaderState();
+  window.addEventListener("scroll", syncHeaderState, { passive: true });
 </script>
 
 <style>
   .site-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 20;
+    isolation: isolate;
     border-bottom: 1px solid var(--border);
-    background: color-mix(in srgb, var(--surface) 92%, transparent);
-    padding-block: var(--space-12);
+    background: color-mix(in srgb, var(--surface) 88%, transparent);
+    padding-block: var(--space-6);
+    backdrop-filter: blur(12px);
+    overflow-anchor: none;
+    transition: padding-block 220ms ease;
   }
 
   .site-header__inner {
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: center;
-    gap: var(--space-6);
+    gap: var(--space-4);
+    min-height: 12rem;
     text-align: center;
+    transition: min-height 220ms ease;
   }
 
   .site-header__identity {
+    grid-column: 1 / -1;
     display: grid;
-    gap: var(--space-2);
+    gap: var(--space-1);
+    justify-items: center;
+    min-width: 0;
+  }
+
+  .site-header__identity h1 {
+    font-size: var(--text-3xl);
+    transition: font-size 220ms ease;
   }
 
   .site-header__title {
     color: var(--text-muted);
-    font-size: var(--text-3xl);
+    font-size: var(--text-xl);
+    transition: font-size 220ms ease;
   }
 
   .site-header__links {
+    grid-column: 1 / -1;
     display: flex;
     flex-wrap: wrap;
+    align-self: start;
+    justify-self: center;
     justify-content: center;
     gap: var(--space-3);
+    margin-top: var(--space-3);
+    transition:
+      align-self 220ms ease,
+      margin-top 220ms ease;
   }
 
   .site-header__link {
@@ -141,14 +190,99 @@ const { name = "Résumé", label, profiles = [] } = Astro.props;
     color: white;
   }
 
-  @media (min-width: 48rem) {
+  .site-header__avatar {
+    position: absolute;
+    bottom: calc(var(--space-6) * -1);
+    left: 50%;
+    display: grid;
+    width: clamp(4.25rem, 3.75rem + 2vw, 5.25rem);
+    aspect-ratio: 1;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.08);
+    padding: 0.1875rem;
+    transform: translate(-50%, 50%);
+    transition:
+      bottom 220ms ease,
+      left 220ms ease,
+      width 220ms ease,
+      transform 220ms ease;
+  }
+
+  .site-header__avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    object-fit: cover;
+  }
+
+  :global(:root[data-theme="dark"]) .site-header__avatar {
+    border-color: var(--border-strong);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.35);
+  }
+
+  .site-header[data-collapsed] {
+    padding-block: var(--space-3);
+  }
+
+  .site-header[data-collapsed] .site-header__inner {
+    min-height: 3.5rem;
+  }
+
+  .site-header[data-collapsed] .site-header__avatar {
+    bottom: 50%;
+    left: 0;
+    width: 3.25rem;
+    transform: translateY(50%);
+  }
+
+  .site-header[data-collapsed] .site-header__identity {
+    grid-column: 2;
+    align-items: baseline;
+    grid-auto-flow: column;
+    justify-content: center;
+    justify-items: center;
+    gap: var(--space-3);
+  }
+
+  .site-header[data-collapsed] .site-header__identity h1 {
+    font-size: var(--text-xl);
+  }
+
+  .site-header[data-collapsed] .site-header__title {
+    font-size: var(--text-base);
+  }
+
+  .site-header[data-collapsed] .site-header__links {
+    grid-column: 3;
+    align-self: center;
+    justify-self: end;
+    gap: var(--space-2);
+    margin-top: 0;
+  }
+
+  .site-header[data-collapsed] .site-header__link {
+    min-height: 2.25rem;
+    font-size: var(--text-sm);
+    padding: var(--space-1) var(--space-3);
+  }
+
+  .site-header[data-collapsed] .site-header__theme-toggle {
+    width: 2.25rem;
+    padding-inline: var(--space-2);
+  }
+
+  @media (max-width: 44rem) {
     .site-header__inner {
-      flex-direction: row;
-      text-align: left;
+      min-height: 12rem;
     }
 
-    .site-header__identity {
-      flex: 1;
+    .site-header[data-collapsed] .site-header__inner {
+      grid-template-columns: 3.25rem minmax(0, 1fr) auto;
+      min-height: 3.5rem;
     }
   }
 </style>

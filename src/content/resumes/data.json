@@ -141,14 +141,33 @@
       ]
     },
     {
-      "name": "VoltX.JS",
-      "description": "Lightweight Reactive Framework",
-      "url": "https://stormlightlabs.github.io/volt",
+      "name": "Lazurite",
+      "description": "Cross-platform Bluesky and Blacksky client",
+      "url": "https://github.com/stormlightlabs/lazurite",
       "highlights": [
-        "Architected signal-based reactive framework (<15KB) enabling declarative HTML-driven UIs without virtual DOM",
-        "Implemented eval-free recursive descent expression parser with sandboxed execution",
-        "Built SSR/hydration layer with scope serialization and plugin architecture",
-        "Dependency-free TypeScript codebase maintained with 95% test coverage"
+        "Built Flutter/Dart mobile client for iOS and Android with Material 3 design",
+        "Implemented AT Protocol features including timelines, feeds, post composition, moderation tools, and account switching",
+        "Designed Drift-backed local cache with offline-aware screens, drafts, saved posts, and semantic search"
+      ]
+    },
+    {
+      "name": "Marker",
+      "description": "Ad-free mobile browser for reading and annotating",
+      "url": "https://github.com/stormlightlabs/marker",
+      "highlights": [
+        "Built Flutter/Dart browser with WebView-based text selection, highlighting, underlining, and note creation",
+        "Implemented persistent annotations using layered W3C-inspired selectors for graceful anchoring across DOM changes",
+        "Designed local-first state architecture with Riverpod, Drift/SQLite, go_router, and injected JavaScript bridge"
+      ]
+    },
+    {
+      "name": "markdownz",
+      "description": "CommonMark-compliant Markdown parser and event API",
+      "url": "https://codeberg.org/desertthunder/markdownz",
+      "highlights": [
+        "Built Zig Markdown engine with AST-first and pull-event APIs for renderers, formatters, and low-allocation integrations",
+        "Implemented CommonMark and GitHub Flavored Markdown parsing with HTML rendering and URL sanitization controls",
+        "Validated parser behavior against vendored CommonMark and GFM conformance corpora"
       ]
     },
     {

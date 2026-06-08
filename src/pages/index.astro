@@ -69,12 +69,22 @@ const ogImageUrl = "/og.png";
   .page-shell {
     display: grid;
     min-height: 100svh;
+    padding-top: calc(12rem + (var(--space-6) * 2) + 2.75rem);
   }
 
   .resume-main {
+    --resume-card-bg: var(--surface-raised);
+    --resume-card-border: var(--border);
+    --resume-raised-shadow: 0 1px 2px rgb(15 23 42 / 0.06);
+
     display: grid;
     gap: var(--space-12);
     padding-bottom: var(--space-12);
+  }
+
+  :global(:root[data-theme="dark"]) .resume-main {
+    --resume-card-border: var(--border-strong);
+    --resume-raised-shadow: 0 1px 2px rgb(0 0 0 / 0.35);
   }
 
   .resume-overview-section {
@@ -87,9 +97,31 @@ const ogImageUrl = "/og.png";
     gap: var(--space-12);
   }
 
+  .resume-overview > :global(.resume-card),
+  :global(.resume-section),
+  :global(.resume-projects-section) {
+    background: var(--resume-card-bg);
+    border-color: var(--resume-card-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--resume-raised-shadow);
+  }
+
+  .resume-overview > :global(.resume-card) {
+    border: 1px solid var(--resume-card-border);
+    padding: var(--space-8);
+  }
+
   @media (min-width: 48rem) {
     .resume-overview {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 40rem) {
+    :global(.resume-section),
+    :global(.resume-projects-section) {
+      border-radius: 0;
+      border-inline: 0;
     }
   }
 </style>

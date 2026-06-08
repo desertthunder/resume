@@ -169,7 +169,7 @@ export default function ResumePdf({ resume }: { resume: Resume }) {
 
           <View style={styles.sidebarContent}>
             <View style={styles.section}>
-              <SectionHeading>About Me</SectionHeading>
+              <SectionHeading>Summary</SectionHeading>
               <Text style={styles.paragraph}>
                 {basics?.summary ||
                   `Software engineer focused on ${basics?.label?.toLowerCase() ?? "building reliable software"}.`}
