@@ -56,7 +56,7 @@ const { name = "Résumé", label, profiles = [] } = Astro.props;
     }
   };
 
-  applyTheme(getStoredTheme() ?? getSystemTheme());
+  applyTheme(getStoredTheme() ?? "light");
 
   toggle?.addEventListener("click", () => {
     applyTheme(getCurrentTheme() === "dark" ? "light" : "dark");
