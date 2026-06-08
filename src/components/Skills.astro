@@ -1,8 +1,8 @@
 ---
+import type { ResumeSkill } from '../types/resume';
 import SectionHeading from "./SectionHeading.astro";
 
-type Skill = { name?: string; level?: string; keywords?: string[] };
-type Props = { skills?: Skill[] };
+type Props = { skills?: ResumeSkill[] };
 const { skills = [] } = Astro.props;
 ---
 
@@ -12,7 +12,7 @@ const { skills = [] } = Astro.props;
       <SectionHeading icon="check" level={3} text="Skills & Expertise" />
 
       <div class="skills-grid">
-        {skills.map((skill, index) => (
+        {skills.map((skill) => (
           <section class="skill-group">
             <h4 class="skill-group__title">{skill.name}</h4>
             {skill.keywords && <p class="skill-keywords">{skill.keywords.join(", ")}</p>}

@@ -1,19 +1,10 @@
 ---
+import type { ResumeAward, ResumeEducation } from '../types/resume';
 import { formatResumeDate, formatResumeDateRange } from "../utils/date";
 import Icon from "./Icon.astro";
 import SectionHeading from "./SectionHeading.astro";
 
-type Education = {
-  institution?: string;
-  studyType?: string;
-  area?: string;
-  startDate?: string;
-  endDate?: string;
-  url?: string;
-};
-
-type Award = { title?: string; date?: string; awarder?: string; summary?: string };
-type Props = { education?: Education[]; awards?: Award[] };
+type Props = { education?: ResumeEducation[]; awards?: ResumeAward[] };
 
 const { education = [], awards = [] } = Astro.props;
 const hasItems = education.length > 0 || awards.length > 0;

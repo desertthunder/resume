@@ -1,8 +1,8 @@
 ---
+import type { ResumeProfile } from '../types/resume';
 import Icon from "./Icon.astro";
 
-type Profile = { network?: string; username?: string; url?: string };
-type Props = { name?: string; profiles?: Profile[] };
+type Props = { name?: string; profiles?: ResumeProfile[] };
 
 const { name = "Résumé", profiles = [] } = Astro.props;
 const year = new Date().getFullYear();

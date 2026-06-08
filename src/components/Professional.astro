@@ -1,18 +1,9 @@
 ---
+import type { ResumeWork } from '../types/resume';
 import { formatResumeDateRange } from "../utils/date";
 import SectionHeading from "./SectionHeading.astro";
 
-type Work = {
-  name?: string;
-  position?: string;
-  startDate?: string;
-  endDate?: string;
-  summary?: string;
-  highlights?: string[];
-  url?: string;
-};
-
-type Props = { work?: Work[] };
+type Props = { work?: ResumeWork[] };
 
 const { work = [] } = Astro.props;
 ---

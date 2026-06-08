@@ -1,6 +1,7 @@
 ---
-type Profile = { network?: string; username?: string; url?: string };
-type Props = { name?: string; label?: string; profiles?: Profile[] };
+import type { ResumeProfile } from '../types/resume';
+
+type Props = { name?: string; label?: string; profiles?: ResumeProfile[] };
 const { name = "Résumé", label, profiles = [] } = Astro.props;
 ---
 

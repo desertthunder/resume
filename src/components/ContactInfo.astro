@@ -1,9 +1,8 @@
 ---
+import type { ResumeLocation, ResumeProfile } from '../types/resume';
 import SectionHeading from "./SectionHeading.astro";
 
-type Location = { city?: string; region?: string; countryCode?: string; address?: string; postalCode?: string };
-type Profile = { network?: string; username?: string; url?: string };
-type Props = { email?: string; phone?: string; url?: string; location?: Location; profiles?: Profile[] };
+type Props = { email?: string; phone?: string; url?: string; location?: ResumeLocation; profiles?: ResumeProfile[] };
 
 const { email, phone, url, location, profiles = [] } = Astro.props;
 const locationText = [location?.city, location?.region, location?.countryCode].filter(Boolean).join(", ");

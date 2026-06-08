@@ -1,8 +1,8 @@
 ---
+import type { ResumeProject } from '../types/resume';
 import SectionHeading from "./SectionHeading.astro";
 
-type Project = { name?: string; description?: string; highlights?: string[]; keywords?: string[]; url?: string };
-type Props = { projects?: Project[] };
+type Props = { projects?: ResumeProject[] };
 
 const { projects = [] } = Astro.props;
 ---
