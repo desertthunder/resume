@@ -2,7 +2,7 @@ import { pdf } from "@react-pdf/renderer";
 import type { APIRoute } from "astro";
 import { getEntry } from "astro:content";
 import React from "react";
-import ResumePdf from "../components/pdf/ResumePdf";
+import ResumePdf from "../components/pdf/resume";
 
 export const prerender = true;
 

@@ -238,10 +238,8 @@ export default function ResumePdf({ resume }: { resume: Resume }) {
                 <SectionHeading>Education</SectionHeading>
                 {resume.education.map((education) => (
                   <View key={`${education.institution}-${education.area}`} style={styles.skillGroup} wrap={false}>
-                    <Text style={styles.skillTitle}>
-                      {education.studyType}
-                      {education.area ? `, ${education.area}` : ""}
-                    </Text>
+                    {education.studyType && <Text style={styles.skillTitle}>{education.studyType}</Text>}
+                    {education.area && <Text style={styles.meta}>{education.area}</Text>}
                     <Text style={styles.meta}>
                       {education.institution}
                       {education.startDate
