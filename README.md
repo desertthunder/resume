@@ -10,3 +10,9 @@ pnpm dev
 pnpm build
 pnpm preview
 ```
+
+## Credit
+
+Adapted from [Colin Hemphill's](https://colinhemphill.com/) fantastic
+[tailwind-nextjs resume](https://github.com/colinhemphill/nextjs-resume)
+to [Astro](https://astro.build/).
