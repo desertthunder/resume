@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy:cf": "pnpm build && wrangler pages deploy dist --project-name owaisj-resume --branch main"
   },
   "dependencies": {
     "@fontsource-variable/atkinson-hyperlegible-next": "^5.2.6",
@@ -18,6 +19,7 @@
     "@fontsource/ibm-plex-sans": "^5.2.8",
     "@fontsource/ibm-plex-serif": "^5.2.7",
     "@react-pdf/renderer": "^4.5.1",
+    "@takumi-rs/image-response": "^0.73.0",
     "astro": "^6.4.4",
     "react": "^19.2.7"
   },
@@ -29,6 +31,7 @@
     "@unocss/preset-icons": "^66.7.0",
     "prettier": "3.8.1",
     "prettier-plugin-astro": "0.14.1",
-    "unocss": "^66.7.0"
+    "unocss": "^66.7.0",
+    "wrangler": "^4.98.0"
   }
 }

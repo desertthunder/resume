@@ -16,6 +16,7 @@ const basics = resume?.basics;
 const pageTitle = basics?.name ? `Résumé | ${basics.name}` : "Résumé";
 const description =
   basics?.summary ?? (basics?.name ? `Professional résumé for ${basics.name}.` : "Professional résumé.");
+const ogImageUrl = "/og.png";
 ---
 
 <html lang="en">
@@ -25,6 +26,14 @@ const description =
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content="Senior Software Engineer & Writer" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content="Senior Software Engineer & Writer" />
+    <meta name="twitter:image" content={ogImageUrl} />
     <title>{pageTitle}</title>
   </head>
   <body>
