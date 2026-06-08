@@ -1,0 +1,120 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+
+type Project = { name?: string; description?: string; highlights?: string[]; keywords?: string[]; url?: string };
+type Props = { projects?: Project[] };
+
+const { projects = [] } = Astro.props;
+---
+
+{
+  projects.length > 0 && (
+    <section class="resume-projects-section">
+      <div class="container resume-card resume-projects">
+        <div class="resume-projects__heading">
+          <SectionHeading icon="paint" level={2} text="Projects" />
+        </div>
+
+        <div class="resume-section__items">
+          {projects.map((project) => (
+            <article class="detail-panel">
+              <div class="detail-panel__header">
+                <h3>
+                  {project.url ? (
+                    <a class="detail-panel__title-link" href={project.url}>
+                      {project.name}
+                    </a>
+                  ) : (
+                    project.name
+                  )}
+                </h3>
+                {project.description && <div class="detail-panel__meta">{project.description}</div>}
+              </div>
+
+              {project.highlights && (
+                <div class="prose">
+                  <ul>
+                    {project.highlights.map((highlight) => (
+                      <li>{highlight}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .resume-projects-section {
+    border-block: 1px solid var(--border);
+    background: var(--surface-muted);
+  }
+
+  .resume-card {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .resume-projects {
+    padding-block: var(--space-12);
+  }
+
+  .resume-projects__heading {
+    display: flex;
+    justify-content: center;
+  }
+
+  .resume-section__items {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .detail-panel {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .detail-panel__header {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .detail-panel__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .detail-panel__title-link {
+    text-decoration: none;
+  }
+
+  .detail-panel__title-link:hover {
+    color: var(--link);
+  }
+
+  .prose {
+    display: grid;
+    gap: var(--space-4);
+    color: var(--text);
+  }
+
+  .prose ul {
+    display: grid;
+    gap: var(--space-1);
+    padding-left: var(--space-4);
+  }
+
+  .prose li::marker {
+    color: var(--text-subtle);
+  }
+</style>

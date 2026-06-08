@@ -1,0 +1,83 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+
+type Location = { city?: string; region?: string; countryCode?: string; address?: string; postalCode?: string };
+type Profile = { network?: string; username?: string; url?: string };
+type Props = { email?: string; phone?: string; url?: string; location?: Location; profiles?: Profile[] };
+
+const { email, phone, url, location, profiles = [] } = Astro.props;
+const locationText = [location?.city, location?.region, location?.countryCode].filter(Boolean).join(", ");
+---
+
+<article class="resume-card">
+  <SectionHeading icon="contact" level={3} text="Contact Information" />
+
+  <ul class="resume-list">
+    {
+      locationText && (
+        <li>
+          <strong>Location:</strong> {locationText}
+        </li>
+      )
+    }
+    {
+      email && (
+        <li>
+          <strong>Email:</strong>{" "}
+          <a class="text-link" href={`mailto:${email}`}>
+            {email}
+          </a>
+        </li>
+      )
+    }
+    {
+      phone && (
+        <li>
+          <strong>Phone:</strong>{" "}
+          <a class="text-link" href={`tel:${phone}`}>
+            {phone}
+          </a>
+        </li>
+      )
+    }
+    {
+      url && (
+        <li>
+          <strong>Website:</strong>{" "}
+          <a class="text-link" href={url}>
+            {url.replace(/^https?:\/\//, "")}
+          </a>
+        </li>
+      )
+    }
+    {
+      profiles.map(
+        (profile) =>
+          profile.url && (
+            <li>
+              <a class="text-link" href={profile.url}>
+                {profile.network ?? profile.username ?? "Profile"}
+              </a>
+            </li>
+          ),
+      )
+    }
+  </ul>
+</article>
+
+<style>
+  .resume-card {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .resume-list {
+    display: grid;
+    gap: var(--space-1);
+    list-style: none;
+  }
+
+  .resume-list strong {
+    font-weight: 800;
+  }
+</style>

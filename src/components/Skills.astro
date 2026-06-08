@@ -1,0 +1,64 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+
+type Skill = { name?: string; level?: string; keywords?: string[] };
+type Props = { skills?: Skill[] };
+const { skills = [] } = Astro.props;
+---
+
+{
+  skills.length > 0 && (
+    <article class="resume-card resume-card--wide">
+      <SectionHeading icon="check" level={3} text="Skills & Expertise" />
+
+      <div class="skills-grid">
+        {skills.map((skill, index) => (
+          <section class="skill-group">
+            <h4 class="skill-group__title">{skill.name}</h4>
+            {skill.keywords && <p class="skill-keywords">{skill.keywords.join(", ")}</p>}
+          </section>
+        ))}
+      </div>
+    </article>
+  )
+}
+
+<style>
+  .resume-card {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .resume-card--wide {
+    grid-column: 1 / -1;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-auto-flow: row;
+    gap: var(--space-2) var(--space-6);
+  }
+
+  .skill-group {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .skill-group__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xl);
+  }
+
+  .skill-keywords {
+    color: var(--text-muted);
+  }
+
+  @media (min-width: 64rem) {
+    .skills-grid {
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, 1fr);
+    }
+  }
+</style>

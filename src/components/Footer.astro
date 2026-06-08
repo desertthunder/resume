@@ -1,0 +1,81 @@
+---
+type Profile = { network?: string; username?: string; url?: string };
+type Props = { name?: string; profiles?: Profile[] };
+
+const { name = "Résumé", profiles = [] } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    {
+      profiles.length > 0 && (
+        <nav class="site-footer__links" aria-label="Profiles">
+          {profiles.map(
+            (profile) =>
+              profile.url && (
+                <a class="site-footer__icon-link" href={profile.url} rel="me">
+                  <span class="sr-only">
+                    {name} on {profile.network}
+                  </span>
+                  {(profile.network ?? profile.username ?? "•").slice(0, 1)}
+                </a>
+              ),
+          )}
+        </nav>
+      )
+    }
+
+    <div>
+      <div>Copyright © {year} {name}</div>
+      <div class="site-footer__small">This résumé was generated with Astro.</div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface-muted);
+    padding-block: var(--space-12);
+    text-align: center;
+  }
+
+  .site-footer__inner {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .site-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+
+  .site-footer__icon-link {
+    display: inline-flex;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: var(--accent-6);
+    color: white;
+    font-weight: 800;
+    text-decoration: none;
+    transition:
+      background 160ms ease,
+      transform 160ms ease;
+  }
+
+  .site-footer__icon-link:hover {
+    background: var(--accent-7);
+    transform: translateY(-1px);
+  }
+
+  .site-footer__small {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+</style>

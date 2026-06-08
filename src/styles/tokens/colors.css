@@ -1,0 +1,85 @@
+:root {
+  color-scheme: light;
+
+  --neutral-1: #fcfcfd;
+  --neutral-2: #f8fafc;
+  --neutral-3: #f1f5f9;
+  --neutral-4: #e2e8f0;
+  --neutral-5: #cbd5e1;
+  --neutral-6: #94a3b8;
+  --neutral-7: #64748b;
+  --neutral-8: #475569;
+  --neutral-9: #334155;
+  --neutral-10: #1e293b;
+  --neutral-11: #0f172a;
+  --neutral-12: #020617;
+
+  --accent-1: #eff6ff;
+  --accent-2: #dbeafe;
+  --accent-3: #bfdbfe;
+  --accent-4: #93c5fd;
+  --accent-5: #60a5fa;
+  --accent-6: #3b82f6;
+  --accent-7: #2563eb;
+  --accent-8: #1d4ed8;
+  --accent-9: #1e40af;
+  --accent-10: #1e3a8a;
+  --accent-11: #172554;
+  --accent-12: #0f1c3f;
+
+  --surface: var(--neutral-1);
+  --surface-muted: var(--neutral-2);
+  --surface-raised: #ffffff;
+  --border: var(--neutral-4);
+  --border-strong: var(--neutral-5);
+  --text: var(--neutral-12);
+  --text-muted: var(--neutral-8);
+  --text-subtle: var(--neutral-7);
+  --link: var(--accent-8);
+  --link-decoration: var(--accent-5);
+  --selection-bg: var(--accent-11);
+  --selection-text: var(--neutral-1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --neutral-1: #020617;
+    --neutral-2: #0f172a;
+    --neutral-3: #111c2f;
+    --neutral-4: #1e293b;
+    --neutral-5: #334155;
+    --neutral-6: #475569;
+    --neutral-7: #64748b;
+    --neutral-8: #94a3b8;
+    --neutral-9: #cbd5e1;
+    --neutral-10: #e2e8f0;
+    --neutral-11: #f1f5f9;
+    --neutral-12: #f8fafc;
+
+    --accent-1: #0b1222;
+    --accent-2: #111c33;
+    --accent-3: #172a4d;
+    --accent-4: #1e3a6f;
+    --accent-5: #24519a;
+    --accent-6: #2b6ccf;
+    --accent-7: #3b82f6;
+    --accent-8: #60a5fa;
+    --accent-9: #93c5fd;
+    --accent-10: #bfdbfe;
+    --accent-11: #dbeafe;
+    --accent-12: #eff6ff;
+
+    --surface: var(--neutral-1);
+    --surface-muted: var(--neutral-2);
+    --surface-raised: var(--neutral-2);
+    --border: var(--neutral-4);
+    --border-strong: var(--neutral-5);
+    --text: var(--neutral-12);
+    --text-muted: var(--neutral-9);
+    --text-subtle: var(--neutral-8);
+    --link: var(--accent-10);
+    --link-decoration: var(--accent-8);
+  }
+}

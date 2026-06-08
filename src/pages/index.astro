@@ -1,17 +1,85 @@
 ---
+import { getEntry } from "astro:content";
+import AboutMe from "../components/AboutMe.astro";
+import Achievements from "../components/Achievements.astro";
+import AdditionalInfo from "../components/AdditionalInfo.astro";
+import ContactInfo from "../components/ContactInfo.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Professional from "../components/Professional.astro";
+import Skills from "../components/Skills.astro";
+import "../styles/style.css";
 
+const resumeEntry = await getEntry("resumes", "data");
+const resume = resumeEntry?.data;
+const basics = resume?.basics;
+const pageTitle = basics?.name ? `Résumé | ${basics.name}` : "Résumé";
+const description =
+  basics?.summary ?? (basics?.name ? `Professional résumé for ${basics.name}.` : "Professional résumé.");
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <div class="page-shell">
+      <Header name={basics?.name} label={basics?.label} profiles={basics?.profiles} />
+
+      <main class="resume-main">
+        <section class="resume-overview-section">
+          <div class="container resume-overview">
+            <AboutMe summary={basics?.summary} label={basics?.label} />
+            <ContactInfo
+              email={basics?.email}
+              phone={basics?.phone}
+              url={basics?.url}
+              location={basics?.location}
+              profiles={basics?.profiles}
+            />
+            <Skills skills={resume?.skills} />
+          </div>
+        </section>
+
+        <Professional work={resume?.work} />
+        <Achievements education={resume?.education} awards={resume?.awards} />
+        <AdditionalInfo projects={resume?.projects} />
+      </main>
+
+      <Footer name={basics?.name} profiles={basics?.profiles} />
+    </div>
+  </body>
 </html>
+
+<style>
+  .page-shell {
+    display: grid;
+    min-height: 100svh;
+  }
+
+  .resume-main {
+    display: grid;
+  }
+
+  .resume-overview-section {
+    background: var(--surface);
+    padding-block: var(--space-12);
+  }
+
+  .resume-overview {
+    display: grid;
+    gap: var(--space-12);
+  }
+
+  @media (min-width: 48rem) {
+    .resume-overview {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -1,0 +1,57 @@
+---
+import Icon from "./Icon.astro";
+
+type Props = {
+  icon?: "user" | "contact" | "check" | "briefcase" | "academic" | "paint" | "link";
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+  text: string;
+  class?: string;
+};
+
+const { icon, level = 3, text, class: className = "" } = Astro.props;
+const Tag = `h${level}` as const;
+---
+
+<Tag class:list={["section-heading", className]}>
+  {
+    icon && (
+      <span class="section-heading__icon">
+        <Icon name={icon} />
+      </span>
+    )
+  }
+  <span>{text}</span>
+</Tag>
+
+<style>
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .section-heading__icon {
+    display: none;
+    width: 1em;
+    height: 1em;
+    flex: none;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--text);
+    color: var(--surface);
+    font-size: inherit;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .section-heading__icon :global(svg) {
+    width: 0.62em;
+    height: 0.62em;
+  }
+
+  @media (min-width: 48rem) {
+    .section-heading__icon {
+      display: grid;
+    }
+  }
+</style>

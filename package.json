@@ -12,8 +12,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@fontsource-variable/albert-sans": "^5.2.8",
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
+    "@fontsource/ibm-plex-sans": "^5.2.8",
+    "@fontsource/ibm-plex-serif": "^5.2.7",
     "astro": "^6.4.4"
   },
   "devDependencies": {

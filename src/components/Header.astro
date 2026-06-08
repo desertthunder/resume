@@ -1,0 +1,97 @@
+---
+type Profile = { network?: string; username?: string; url?: string };
+type Props = { name?: string; label?: string; profiles?: Profile[] };
+const { name = "Résumé", label, profiles = [] } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <div class="site-header__identity">
+      <h1>{name}</h1>
+      {label && <h2 class="site-header__title">{label}</h2>}
+    </div>
+
+    {
+      profiles.length > 0 && (
+        <nav class="site-header__links" aria-label="Profiles">
+          {profiles.map(
+            (profile) =>
+              profile.url && (
+                <a class="site-header__link" href={profile.url} rel="me">
+                  {profile.network ?? profile.username ?? "Profile"}
+                </a>
+              ),
+          )}
+        </nav>
+      )
+    }
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    padding-block: var(--space-12);
+  }
+
+  .site-header__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+    text-align: center;
+  }
+
+  .site-header__identity {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .site-header__title {
+    color: var(--text-muted);
+    font-size: var(--text-3xl);
+  }
+
+  .site-header__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+
+  .site-header__link {
+    display: inline-flex;
+    min-height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: var(--surface-raised);
+    color: var(--text-muted);
+    font-weight: 700;
+    padding: var(--space-2) var(--space-4);
+    text-decoration: none;
+    transition:
+      border-color 160ms ease,
+      color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .site-header__link:hover {
+    border-color: var(--accent-7);
+    color: var(--link);
+    transform: translateY(-1px);
+  }
+
+  @media (min-width: 48rem) {
+    .site-header__inner {
+      flex-direction: row;
+      text-align: left;
+    }
+
+    .site-header__identity {
+      flex: 1;
+    }
+  }
+</style>

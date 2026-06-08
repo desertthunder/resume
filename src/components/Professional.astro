@@ -1,0 +1,194 @@
+---
+import { formatResumeDateRange } from "../utils/date";
+import SectionHeading from "./SectionHeading.astro";
+
+type Work = {
+  name?: string;
+  position?: string;
+  startDate?: string;
+  endDate?: string;
+  summary?: string;
+  highlights?: string[];
+  url?: string;
+};
+
+type Props = { work?: Work[] };
+
+const { work = [] } = Astro.props;
+---
+
+{
+  work.length > 0 && (
+    <section class="resume-section" aria-labelledby="professional-heading">
+      <div class="container resume-section__inner">
+        <SectionHeading class="resume-section__heading" icon="briefcase" level={2} text="Professional Experience" />
+
+        <div class="resume-section__items">
+          {work.map((job) => (
+            <article class="detail-panel">
+              <h3>
+                {job.url ? (
+                  <a class="detail-panel__title-link" href={job.url}>
+                    {job.name}
+                  </a>
+                ) : (
+                  job.name
+                )}
+              </h3>
+
+              <ul class="timeline">
+                <li class="timeline__item">
+                  <div class="timeline__rail" aria-hidden="true">
+                    <span class="timeline__dot" />
+                    <span class="timeline__line" />
+                  </div>
+                  <div class="timeline__body">
+                    <div class="timeline__position">{job.position}</div>
+                    <div class="timeline__dates">{formatResumeDateRange(job.startDate, job.endDate)}</div>
+                  </div>
+                </li>
+              </ul>
+
+              {(job.summary || job.highlights?.length) && (
+                <div class="prose">
+                  <ul>
+                    {job.summary && (
+                      <li>
+                        <strong>{job.summary}</strong>
+                      </li>
+                    )}
+                    {job.highlights?.map((highlight) => (
+                      <li>{highlight}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              <hr class="resume-separator" />
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .resume-section {
+    border: 1px solid var(--border);
+    background: var(--surface-muted);
+    padding-block: var(--space-12);
+  }
+
+  .resume-section__inner {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  :global(.resume-section__heading) {
+    justify-content: center;
+  }
+
+  .resume-section__items {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .detail-panel {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .detail-panel__title-link {
+    text-decoration: none;
+  }
+
+  .detail-panel__title-link:hover {
+    color: var(--link);
+  }
+
+  .timeline {
+    display: grid;
+    gap: 0;
+    list-style: none;
+  }
+
+  .timeline__item {
+    display: flex;
+    gap: var(--space-6);
+  }
+
+  .timeline__rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .timeline__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    flex: none;
+    border-radius: 999px;
+    background: var(--accent-9);
+    margin-top: 0.38rem;
+  }
+
+  .timeline__line {
+    width: 2px;
+    height: 100%;
+    border-radius: 999px;
+    background: var(--accent-3);
+  }
+
+  .timeline__item:last-child .timeline__line {
+    display: none;
+  }
+
+  .timeline__body {
+    display: grid;
+    gap: var(--space-3);
+    padding-bottom: var(--space-4);
+  }
+
+  .timeline__item:last-child .timeline__body {
+    padding-bottom: 0;
+  }
+
+  .timeline__position {
+    font-size: var(--text-lg);
+    font-weight: 800;
+    line-height: var(--leading-tight);
+  }
+
+  .timeline__dates {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    letter-spacing: 0.03em;
+  }
+
+  .prose {
+    display: grid;
+    gap: var(--space-4);
+    color: var(--text);
+  }
+
+  .prose ul {
+    display: grid;
+    gap: var(--space-1);
+    padding-left: var(--space-4);
+  }
+
+  .prose li::marker {
+    color: var(--text-subtle);
+  }
+
+  .resume-separator {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .resume-section__items > :last-child .resume-separator {
+    display: none;
+  }
+</style>

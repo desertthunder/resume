@@ -1,4 +1,5 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 const locationSchema = z
   .object({
@@ -11,11 +12,7 @@ const locationSchema = z
   .passthrough();
 
 const profileSchema = z
-  .object({
-    network: z.string().optional(),
-    username: z.string().optional(),
-    url: z.string().optional(),
-  })
+  .object({ network: z.string().optional(), username: z.string().optional(), url: z.string().optional() })
   .passthrough();
 
 const basicsSchema = z
@@ -86,33 +83,16 @@ const publicationSchema = z
   .passthrough();
 
 const skillSchema = z
-  .object({
-    name: z.string().optional(),
-    level: z.string().optional(),
-    keywords: z.array(z.string()).optional(),
-  })
+  .object({ name: z.string().optional(), level: z.string().optional(), keywords: z.array(z.string()).optional() })
   .passthrough();
 
-const languageSchema = z
-  .object({
-    language: z.string().optional(),
-    fluency: z.string().optional(),
-  })
-  .passthrough();
+const languageSchema = z.object({ language: z.string().optional(), fluency: z.string().optional() }).passthrough();
 
 const interestSchema = z
-  .object({
-    name: z.string().optional(),
-    keywords: z.array(z.string()).optional(),
-  })
+  .object({ name: z.string().optional(), keywords: z.array(z.string()).optional() })
   .passthrough();
 
-const referenceSchema = z
-  .object({
-    name: z.string().optional(),
-    reference: z.string().optional(),
-  })
-  .passthrough();
+const referenceSchema = z.object({ name: z.string().optional(), reference: z.string().optional() }).passthrough();
 
 const projectSchema = z
   .object({
@@ -156,7 +136,7 @@ export const resumeSchema = z
   .passthrough();
 
 const resumes = defineCollection({
-  type: 'data',
+  loader: glob({ pattern: "**/*.json", base: "./src/content/resumes" }),
   schema: resumeSchema,
 });
 
