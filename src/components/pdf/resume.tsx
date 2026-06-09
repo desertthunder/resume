@@ -92,11 +92,29 @@ const styles = StyleSheet.create({
   projectPage: {
     backgroundColor: colors.surface,
     color: colors.text,
+    flexDirection: "column",
     fontFamily: "IBM Plex Sans",
     fontSize: fontSizes.xs,
     lineHeight: 1.35,
     padding: space[6],
   },
+  projectPageContent: { flexGrow: 1 },
+  projectFooter: {
+    alignItems: "center",
+    backgroundColor: colors.accent,
+    color: colors.white,
+    flexDirection: "row",
+    fontSize: fontSizes.xxs,
+    justifyContent: "space-between",
+    marginTop: space[4],
+    paddingHorizontal: space[4],
+    paddingVertical: space[3],
+  },
+  projectFooterIdentity: { gap: 1 },
+  projectFooterName: { color: colors.white, fontFamily: "IBM Plex Serif", fontSize: fontSizes.sm, fontWeight: 700 },
+  projectFooterTitle: { color: colors.white, fontSize: fontSizes.xxs, fontWeight: 700 },
+  projectFooterLink: { color: colors.white, textDecoration: "none" },
+  projectFooterMeta: { color: colors.white, letterSpacing: 0.3, textAlign: "right" },
   section: { gap: space[2], marginBottom: space[5] },
   sectionHeading: { marginBottom: space[1] },
   sectionHeadingText: { fontFamily: "IBM Plex Serif", fontSize: fontSizes.lg, fontWeight: 700 },
@@ -120,26 +138,24 @@ const styles = StyleSheet.create({
   skillTitle: { fontFamily: "IBM Plex Serif", fontSize: fontSizes.sm, fontWeight: 700 },
 });
 
-function SectionHeading({ children }: { children: ReactNode }) {
-  return (
-    <View style={styles.sectionHeading}>
-      <Text style={styles.sectionHeadingText}>{children}</Text>
-    </View>
-  );
-}
+const SectionHeading = ({ children }: { children: ReactNode }) => (
+  <View style={styles.sectionHeading}>
+    <Text style={styles.sectionHeadingText}>{children}</Text>
+  </View>
+);
 
-function BulletList({ items, boldFirst = false }: { items: string[]; boldFirst?: boolean }) {
-  return (
-    <View style={styles.list}>
-      {items.map((item, index) => (
-        <View key={`${item}-${index}`} style={styles.listItem}>
-          <Text style={styles.bullet}>•</Text>
-          <Text style={[styles.bulletText, boldFirst && index === 0 ? styles.bold : undefined]}>{item}</Text>
-        </View>
-      ))}
-    </View>
-  );
-}
+const BulletList = ({ items, boldFirst = false }: { items: string[]; boldFirst?: boolean }) => (
+  <View style={styles.list}>
+    {items.map((item, index) => (
+      <View key={`${item}-${index}`} style={styles.listItem}>
+        <Text style={styles.bullet}>•</Text>
+        <Text style={boldFirst && index === 0 ? { ...styles.bulletText, ...styles.bold } : styles.bulletText}>
+          {item}
+        </Text>
+      </View>
+    ))}
+  </View>
+);
 
 function locationText(
   location: Resume["basics"] extends infer Basics
@@ -153,11 +169,24 @@ function locationText(
   return [city, region, countryCode].filter(Boolean).join(", ");
 }
 
+const urlFor = (
+  network: "linkedin" | "github",
+  profiles: Resume["basics"] extends infer Basics
+    ? Basics extends { profiles?: infer Profiles }
+      ? Profiles
+      : never
+    : never,
+): string | null => profiles.find((profile) => profile.network?.toLowerCase() === network)?.url ?? null;
+
+const sanitizeUrl = (uri?: string): string => (uri ? uri.replace(/^https?:\/\//, "") : "");
+
 export default function ResumePdf({ resume }: { resume: Resume }) {
   const basics = resume.basics;
   const name = basics?.name ?? "Résumé";
   const year = new Date().getFullYear();
   const profiles = basics?.profiles ?? [];
+  const linkedInUrl = urlFor("linkedin", profiles);
+  const ghUrl = urlFor("github", profiles);
   return (
     <Document author={name} title={`Résumé for ${name}, ${year}`}>
       <Page size="LETTER" style={styles.page}>
@@ -179,7 +208,7 @@ export default function ResumePdf({ resume }: { resume: Resume }) {
             <View style={styles.section}>
               <SectionHeading>Contact</SectionHeading>
               <View style={styles.contactRows}>
-                {locationText(basics?.location) && (
+                {basics?.location && locationText(basics?.location) && (
                   <View style={styles.contactRow}>
                     <Text style={styles.bold}>Location: </Text>
                     <Text>{locationText(basics?.location)}</Text>
@@ -213,7 +242,7 @@ export default function ResumePdf({ resume }: { resume: Resume }) {
                       <View key={`${profile.network}-${profile.url}`} style={styles.contactRow}>
                         <Text style={styles.bold}>{profile.network ?? "Profile"}: </Text>
                         <Link href={profile.url} style={styles.link}>
-                          {profile.username ?? profile.url.replace(/^https?:\/\//, "")}
+                          {profile.username ?? sanitizeUrl(profile.url)}
                         </Link>
                       </View>
                     ),
@@ -276,17 +305,54 @@ export default function ResumePdf({ resume }: { resume: Resume }) {
         </View>
       </Page>
 
-      {!!resume.projects?.length && (
+      {resume.projects && resume.projects.length > 0 && (
         <Page size="LETTER" style={styles.projectPage}>
-          <View style={styles.section}>
-            <SectionHeading>Projects</SectionHeading>
-            {resume.projects.map((project) => (
-              <View key={project.name} style={styles.item} wrap={false}>
-                <Text style={styles.itemHeading}>{project.name}</Text>
-                {project.description && <Text style={styles.meta}>{project.description}</Text>}
-                {!!project.highlights?.length && <BulletList items={project.highlights} />}
-              </View>
-            ))}
+          <View style={styles.projectPageContent}>
+            <View style={styles.section}>
+              <SectionHeading>Projects</SectionHeading>
+              {resume.projects.map((project) => (
+                <View key={project.name} style={styles.item} wrap={false}>
+                  <Text style={styles.itemHeading}>{project.name}</Text>
+                  {project.description &&
+                    (project.url ? (
+                      <Link href={project.url} style={{ ...styles.meta, textDecoration: "none" }}>
+                        {project.description} · {sanitizeUrl(project.url)}
+                      </Link>
+                    ) : (
+                      <Text style={styles.meta}>{project.description}</Text>
+                    ))}
+                  {project.highlights && project.highlights.length > 0 && <BulletList items={project.highlights} />}
+                </View>
+              ))}
+            </View>
+          </View>
+
+          <View style={styles.projectFooter} fixed>
+            <View style={styles.projectFooterIdentity}>
+              <Text style={styles.projectFooterName}>{name}</Text>
+              {basics && basics.label && <Text style={styles.projectFooterTitle}>{basics.label}</Text>}
+            </View>
+            <View style={styles.projectFooterMeta}>
+              {ghUrl ? (
+                <Link href={ghUrl} style={styles.projectFooterLink}>
+                  {sanitizeUrl(ghUrl)}
+                </Link>
+              ) : basics?.url ? (
+                <Link href={basics.url} style={styles.projectFooterLink}>
+                  {basics.url.replace(/^https?:\/\//, "")}
+                </Link>
+              ) : (
+                <Text>Résumé</Text>
+              )}
+
+              {linkedInUrl ? (
+                <Link href={linkedInUrl} style={styles.projectFooterLink}>
+                  {sanitizeUrl(linkedInUrl)}
+                </Link>
+              ) : (
+                <Text>Projects · {year}</Text>
+              )}
+            </View>
           </View>
         </Page>
       )}
