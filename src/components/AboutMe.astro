@@ -1,5 +1,5 @@
 ---
-import SectionHeading from './SectionHeading.astro';
+import SectionHeading from "./SectionHeading.astro";
 
 interface Props {
   summary?: string;
@@ -12,7 +12,12 @@ const { summary, label } = Astro.props;
 <article class="resume-card">
   <SectionHeading icon="user" level={3} text="About Me" />
   <div class="prose">
-    <p>{summary || `Software engineer focused on ${label?.toLowerCase() ?? 'building reliable, human-centered software'}.`}</p>
+    <p>
+      {
+        summary ||
+          `Software engineer focused on ${label?.toLowerCase() ?? "building reliable, human-centered software"}.`
+      }
+    </p>
   </div>
 </article>
 

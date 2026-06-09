@@ -10,7 +10,8 @@ type IconName =
   | "link"
   | "github"
   | "sun"
-  | "moon";
+  | "moon"
+  | "ext-link";
 
 type Props = { name: IconName; label?: string; class?: string; [attribute: string]: unknown };
 
@@ -28,6 +29,7 @@ const icons: Record<IconName, string> = {
   sun: "i-ri-sun-fill",
   moon: "i-ri-moon-fill",
   linkedin: "i-ri-linkedin-fill",
+  "ext-link": "i-ri-external-link-line",
 };
 ---
 

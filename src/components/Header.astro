@@ -281,8 +281,27 @@ const { name = "Résumé", label, profiles = [] } = Astro.props;
     }
 
     .site-header[data-collapsed] .site-header__inner {
-      grid-template-columns: 3.25rem minmax(0, 1fr) auto;
-      min-height: 3.5rem;
+      grid-template-columns: 3.25rem minmax(0, 1fr);
+      grid-template-rows: 3.25rem auto;
+      row-gap: var(--space-2);
+      min-height: auto;
+    }
+
+    .site-header[data-collapsed] .site-header__avatar {
+      top: 0;
+      bottom: auto;
+      transform: none;
+    }
+
+    .site-header[data-collapsed] .site-header__identity {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .site-header[data-collapsed] .site-header__links {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      justify-self: center;
     }
   }
 </style>

@@ -2,7 +2,7 @@
 import { getEntry } from "astro:content";
 import AboutMe from "../components/AboutMe.astro";
 import Achievements from "../components/Achievements.astro";
-import AdditionalInfo from "../components/AdditionalInfo.astro";
+import Projects from "../components/Projects.astro";
 import ContactInfo from "../components/ContactInfo.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
@@ -57,7 +57,7 @@ const ogImageUrl = "/og.png";
 
         <Professional work={resume?.work} />
         <Achievements education={resume?.education} awards={resume?.awards} />
-        <AdditionalInfo projects={resume?.projects} />
+        <Projects projects={resume?.projects} />
       </main>
 
       <Footer name={basics?.name} profiles={basics?.profiles} />

@@ -1,6 +1,7 @@
 ---
-import type { ResumeProject } from '../types/resume';
+import type { ResumeProject } from "../types/resume";
 import SectionHeading from "./SectionHeading.astro";
+import Icon from "./Icon.astro";
 
 type Props = { projects?: ResumeProject[] };
 
@@ -21,8 +22,9 @@ const { projects = [] } = Astro.props;
               <div class="detail-panel__header">
                 <h3>
                   {project.url ? (
-                    <a class="detail-panel__title-link" href={project.url}>
+                    <a class="detail-panel__title-link" href={project.url} target="_blank">
                       {project.name}
+                      <Icon name="ext-link" class="project-links-icon" />
                     </a>
                   ) : (
                     project.name
@@ -104,10 +106,18 @@ const { projects = [] } = Astro.props;
 
   .detail-panel__title-link {
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
   }
 
   .detail-panel__title-link:hover {
     color: var(--link);
+  }
+
+  .detail-panel__title-link :global(.project-links-icon) {
+    width: 1.75rem;
+    height: 1.75rem;
   }
 
   .prose {

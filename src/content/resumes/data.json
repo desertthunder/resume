@@ -121,7 +121,7 @@
     {
       "name": "Beacon",
       "description": "Python Type Checker and Language Server",
-      "url": "https://beacon.stormlightlabs.org",
+      "url": "https://stormlightlabs.github.io/beacon",
       "highlights": [
         "Architected Rust-based LSP implementation with Hindley-Milner type inference engine",
         "Implemented comprehensive code intelligence including real-time diagnostics and type narrowing via control flow analysis",

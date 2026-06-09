@@ -1,8 +1,8 @@
 ---
-import type { ResumeWork } from '../types/resume';
+import type { ResumeWork } from "../types/resume";
 import { formatResumeDateRange } from "../utils/date";
 import SectionHeading from "./SectionHeading.astro";
-
+import Icon from "./Icon.astro";
 type Props = { work?: ResumeWork[] };
 
 const { work = [] } = Astro.props;
@@ -20,10 +20,11 @@ const { work = [] } = Astro.props;
               <h3>
                 {job.url ? (
                   <a class="detail-panel__title-link" href={job.url}>
-                    {job.name}
+                    <span>{job.name}</span>
+                    <Icon name="ext-link" class="project-links-icon" />
                   </a>
                 ) : (
-                  job.name
+                  <span>{job.name}</span>
                 )}
               </h3>
 
@@ -90,6 +91,10 @@ const { work = [] } = Astro.props;
   }
 
   .detail-panel__title-link {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-1);
     text-decoration: none;
   }
 
