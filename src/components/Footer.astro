@@ -16,7 +16,7 @@ const year = new Date().getFullYear();
           {profiles.map(
             (profile) =>
               profile.url && (
-                <a class="site-footer__icon-link" href={profile.url} rel="me">
+                <a class="site-footer__icon-link" href={profile.url} target="_blank">
                   <span class="sr-only">
                     {name} on {profile.network}
                   </span>
@@ -24,6 +24,8 @@ const year = new Date().getFullYear();
                     <Icon name="github" />
                   ) : profile.network?.toLowerCase() === "linkedin" ? (
                     <Icon name="linkedin" />
+                  ) : profile.network?.toLowerCase() === "sifa" ? (
+                    <img class="site-footer__sifa-icon" src="/icons/sifa.svg" alt="" loading="lazy" />
                   ) : (
                     (profile.network ?? profile.username ?? "•").slice(0, 1)
                   )}
@@ -37,7 +39,7 @@ const year = new Date().getFullYear();
     <div>
       <div>Copyright © {year} <a href={website} target="_blank">{name}</a></div>
       <div class="site-footer__small">Built with ⚡️ & Astro in Austin, TX</div>
-      <a class="site_footer__small site-footer__manual" href="/resume.txt">View as PlainText</a>
+      <a class="site-footer__manual" href="/resume.txt">View as PlainText</a>
     </div>
   </div>
 </footer>
@@ -83,17 +85,25 @@ const year = new Date().getFullYear();
     transform: translateY(-1px);
   }
 
+  .site-footer__sifa-icon {
+    width: 1.65rem;
+    height: 1.65rem;
+  }
+
   .site-footer__manual {
     display: inline-block;
+    text-transform: lowercase;
     margin-block-end: var(--space-2);
     color: var(--link);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
     text-decoration-color: var(--link-decoration);
+    font-weight: 500;
   }
 
   .site-footer__small {
     color: var(--text-muted);
     font-size: var(--text-sm);
+    font-weight: 500;
   }
 </style>

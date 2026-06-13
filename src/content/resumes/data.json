@@ -9,7 +9,8 @@
     "location": { "city": "Austin", "region": "TX", "countryCode": "US" },
     "profiles": [
       { "network": "GitHub", "username": "desertthunder", "url": "https://github.com/desertthunder" },
-      { "network": "LinkedIn", "url": "https://linkedin.com/in/owais-jamil" }
+      { "network": "LinkedIn", "url": "https://linkedin.com/in/owais-jamil" },
+      { "network": "Sifa", "url": "https://sifa.id/p/desertthunder.dev" }
     ]
   },
   "work": [
