@@ -16,7 +16,7 @@ const paragraph = (text: string | undefined) => (text ? `${wrapLine(text)}\n` : 
 
 function dateRange(startDate?: string, endDate?: string) {
   if (!startDate && !endDate) return undefined;
-  return `${startDate ?? ""}${startDate || endDate ? "-" : ""}${endDate ?? "present"}`;
+  return `${startDate ?? ""}${startDate || endDate ? " - " : ""}${endDate ?? "present"}`;
 }
 
 function wrapLine(text: string, indent = CONTENT_INDENT, subsequentIndent = indent) {
@@ -62,10 +62,8 @@ function renderResumeAsManPage(resume: Resume) {
     basics?.email && `Email: ${basics.email}`,
     basics?.phone && `Phone: ${basics.phone}`,
     basics?.url && `Web: ${basics.url}`,
-    location && `Location: ${location}`,
-    ...(basics?.profiles?.map((profile) =>
-      compact([profile.network, profile.username && `(${profile.username})`, profile.url && `- ${profile.url}`]),
-    ) ?? []),
+    "\n",
+    ...(basics?.profiles?.map((profile) => compact([`${profile.network}:`, profile.url && `${profile.url}`])) ?? []),
   ].filter(Boolean);
 
   const sections: string[] = [
@@ -93,7 +91,7 @@ function renderResumeAsManPage(resume: Resume) {
               work.name && `at ${work.name}`,
               dateRange(work.startDate, work.endDate) && `(${dateRange(work.startDate, work.endDate)})`,
             ]);
-            return item(heading, [work.summary, ...(work.highlights?.map((highlight) => `- ${highlight}`) ?? [])]);
+            return item(heading, [work.summary, ...(work.highlights?.map((highlight) => `${highlight}`) ?? [])]);
           })
           .join("\n\n") +
         "\n",
@@ -115,7 +113,7 @@ function renderResumeAsManPage(resume: Resume) {
           .map((project) =>
             item(compact([project.name, project.url && `(${project.url})`]), [
               project.description,
-              ...(project.highlights?.map((highlight) => `- ${highlight}`) ?? []),
+              ...(project.highlights?.map((highlight) => `${highlight}`) ?? []),
             ]),
           )
           .join("\n\n") +

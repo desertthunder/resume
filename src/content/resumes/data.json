@@ -33,6 +33,7 @@
       "highlights": [
         "Adapted new data model to the API, as well as connectors for new integrations",
         "Built and designed novel system architecture around PubSub and BigQuery, and Cloud functions",
+        "Ran production data workloads on GCP using Pub/Sub, BigQuery, Cloud Functions, Kubernetes, Redis, and Postgres to move school roster data reliably",
         "NestJS (with TypeScript) and Postgres in a Kubernetes cluster on GCP with Redis. Dashboard built with Vue"
       ]
     },
@@ -44,6 +45,7 @@
       "summary": "Independently gathered requirements from customers and management to develop new features for a higher education Environmental Health and Safety SaaS.",
       "highlights": [
         "Built features for a React Native application while adding endpoints to the internal API",
+        "Shipped Rails and Sidekiq services on AWS ECS, tuning container tasks, background jobs, and Postgres-backed workflows for campus safety teams",
         "Complete Stack: Redis for Sidekiq, Ruby on Rails monolith, and Postgres deployed to AWS Elastic Container Service"
       ]
     },
