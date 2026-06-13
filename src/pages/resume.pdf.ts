@@ -14,9 +14,11 @@ export const GET: APIRoute = async () => {
   }
 
   const pdfBuffer = await pdf(
+    //@ts-expect-error
     React.createElement(ResumePdf, { resume: resumeEntry.data }) as React.ReactElement,
   ).toBuffer();
 
+  //@ts-expect-error
   return new Response(pdfBuffer, {
     headers: { "Content-Disposition": 'inline; filename="resume.pdf"', "Content-Type": "application/pdf" },
   });
