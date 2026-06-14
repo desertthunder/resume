@@ -15,7 +15,7 @@ export const GET: APIRoute = async () => {
 
   const pdfBuffer = await pdf(
     //@ts-expect-error
-    React.createElement(ResumePdf, { resume: resumeEntry.data }) as React.ReactElement,
+    React.createElement(ResumePdf, { resume: resumeEntry.data, projectPageSize: 6 }) as React.ReactElement,
   ).toBuffer();
 
   //@ts-expect-error

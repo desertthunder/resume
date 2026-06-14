@@ -122,6 +122,27 @@
       ]
     },
     {
+      "name": "Regulus",
+      "description": "Experimental Gleam to WebAssembly compiler",
+      "url": "https://github.com/desertthunder/regulus",
+      "highlights": [
+        "Built a Rust compiler pipeline that parses Gleam with tree-sitter, owns its AST, resolves names, type checks a supported subset, lowers to core IR, and emits deterministic WebAssembly",
+        "Implemented support for scalar values, managed runtime values, pattern matching, closures, selected standard library modules, host imports, and whole-project linked output",
+        "Validated compiler behavior with source-span diagnostics, optional WAT rendering, and Wasmtime tests for scalar and managed-value exports"
+      ]
+    },
+    {
+      "name": "Tempest",
+      "description": "Self-hostable AT Protocol Personal Data Server",
+      "url": "https://github.com/desertthunder/tempest",
+      "highlights": [
+        "Built an Elixir/Phoenix PDS with account, repository, blob, access, security, migration, sequencer, and firehose operator tooling",
+        "Implemented local development storage backed by SQLite databases and configurable blob limits, hostname, public URL, DID method, and crawler settings",
+        "Maintained admin status and compatibility tooling for AT Protocol endpoint coverage, plus built-in documentation, changelog, and development email previews"
+      ]
+    },
+
+    {
       "name": "Beacon",
       "description": "Python Type Checker and Language Server",
       "url": "https://stormlightlabs.github.io/beacon",
@@ -132,17 +153,7 @@
         "Designed incremental analysis architecture with multi-layer caching supporting VS Code, Zed, Neovim, and Helix"
       ]
     },
-    {
-      "name": "Big Fly",
-      "description": "Comprehensive Baseball Statistics REST API",
-      "url": "https://bigfly.tech",
-      "highlights": [
-        "Built RESTful API with Go and PostgreSQL serving historical data from Lahman Database and Retrosheet",
-        "Implemented advanced analytics including win probability calculations from 2,143 unique game states",
-        "Designed trigger-maintained search vectors with GIN/trigram indexes enabling sub-millisecond queries",
-        "Architected ETL pipeline with materialized views and comprehensive Swagger/OpenAPI documentation"
-      ]
-    },
+
     {
       "name": "Lazurite",
       "description": "Cross-platform Bluesky and Blacksky client",
@@ -151,6 +162,16 @@
         "Built Flutter/Dart mobile client for iOS and Android with Material 3 design",
         "Implemented AT Protocol features including timelines, feeds, post composition, moderation tools, and account switching",
         "Designed Drift-backed local cache with offline-aware screens, drafts, saved posts, and semantic search"
+      ]
+    },
+    {
+      "name": "MarkdownZ",
+      "description": "CommonMark-compliant Markdown parser and event API",
+      "url": "https://codeberg.org/desertthunder/markdownz",
+      "highlights": [
+        "Built Zig Markdown engine with AST-first and pull-event APIs for renderers, formatters, and low-allocation integrations",
+        "Implemented multi-dialect parsing with HTML rendering and URL sanitization controls",
+        "Full CommonMark and GFM spec compliance with integrated conformance corpora"
       ]
     },
     {
@@ -164,13 +185,14 @@
       ]
     },
     {
-      "name": "markdownz",
-      "description": "CommonMark-compliant Markdown parser and event API",
-      "url": "https://codeberg.org/desertthunder/markdownz",
+      "name": "Big Fly",
+      "description": "Comprehensive Baseball Statistics REST API",
+      "url": "https://bigfly.tech",
       "highlights": [
-        "Built Zig Markdown engine with AST-first and pull-event APIs for renderers, formatters, and low-allocation integrations",
-        "Implemented CommonMark and GitHub Flavored Markdown parsing with HTML rendering and URL sanitization controls",
-        "Validated parser behavior against vendored CommonMark and GFM conformance corpora"
+        "Built RESTful API with Go and PostgreSQL serving historical data from Lahman Database and Retrosheet",
+        "Implemented advanced analytics including win probability calculations from 2,143 unique game states",
+        "Designed trigger-maintained search vectors with GIN/trigram indexes enabling sub-millisecond queries",
+        "Architected ETL pipeline with materialized views and comprehensive Swagger/OpenAPI documentation"
       ]
     },
     {

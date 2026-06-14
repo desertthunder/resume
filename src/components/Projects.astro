@@ -6,6 +6,11 @@ import Icon from "./Icon.astro";
 type Props = { projects?: ResumeProject[] };
 
 const { projects = [] } = Astro.props;
+const projectsPerPage = 3;
+const projectPages = Array.from({ length: Math.ceil(projects.length / projectsPerPage) }, (_, index) =>
+  projects.slice(index * projectsPerPage, (index + 1) * projectsPerPage),
+);
+const hasPagination = projectPages.length > 1;
 ---
 
 {
@@ -16,35 +21,58 @@ const { projects = [] } = Astro.props;
           <SectionHeading icon="paint" level={2} text="Projects" />
         </div>
 
-        <div class="resume-section__items">
-          {projects.map((project) => (
-            <article class="detail-panel">
-              <div class="detail-panel__header">
-                <h3>
-                  {project.url ? (
-                    <a class="detail-panel__title-link" href={project.url} target="_blank">
-                      {project.name}
-                      <Icon name="ext-link" class="project-links-icon" />
-                    </a>
-                  ) : (
-                    project.name
-                  )}
-                </h3>
-                {project.description && <div class="detail-panel__meta">{project.description}</div>}
-              </div>
+        <div class="resume-projects__pages" data-project-pagination>
+          {projectPages.map((pageProjects, pageIndex) => (
+            <div
+              class="resume-section__items"
+              data-project-page={pageIndex + 1}
+              hidden={pageIndex > 0}
+              aria-label={`Projects page ${pageIndex + 1}`}
+            >
+              {pageProjects.map((project) => (
+                <article class="detail-panel">
+                  <div class="detail-panel__header">
+                    <h3>
+                      {project.url ? (
+                        <a class="detail-panel__title-link" href={project.url} target="_blank">
+                          {project.name}
+                          <Icon name="ext-link" class="project-links-icon" />
+                        </a>
+                      ) : (
+                        project.name
+                      )}
+                    </h3>
+                    {project.description && <div class="detail-panel__meta">{project.description}</div>}
+                  </div>
 
-              {project.highlights && (
-                <div class="prose">
-                  <ul>
-                    {project.highlights.map((highlight) => (
-                      <li>{highlight}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </article>
+                  {project.highlights && (
+                    <div class="prose">
+                      <ul>
+                        {project.highlights.map((highlight) => (
+                          <li>{highlight}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
           ))}
         </div>
+
+        {hasPagination && (
+          <nav class="project-pagination" aria-label="Project pages" data-project-pagination-controls>
+            <button class="project-pagination__button" type="button" data-project-prev disabled>
+              Previous
+            </button>
+            <span class="project-pagination__status" aria-live="polite" data-project-status>
+              Page 1 of {projectPages.length}
+            </span>
+            <button class="project-pagination__button" type="button" data-project-next>
+              Next
+            </button>
+          </nav>
+        )}
       </div>
     </section>
   )
@@ -78,9 +106,52 @@ const { projects = [] } = Astro.props;
     justify-content: center;
   }
 
+  .resume-projects__pages {
+    display: grid;
+  }
+
   .resume-section__items {
     display: grid;
     gap: var(--space-8);
+  }
+
+  .resume-section__items[hidden] {
+    display: none;
+  }
+
+  .project-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    padding-top: var(--space-2);
+  }
+
+  .project-pagination__button {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    padding: var(--space-2) var(--space-4);
+  }
+
+  .project-pagination__button:not(:disabled):hover {
+    border-color: var(--link);
+    color: var(--link);
+  }
+
+  .project-pagination__button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+
+  .project-pagination__status {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    font-weight: 700;
   }
 
   .detail-panel {
@@ -136,3 +207,32 @@ const { projects = [] } = Astro.props;
     color: var(--text-subtle);
   }
 </style>
+
+<script>
+  const paginator = document.querySelector<HTMLElement>("[data-project-pagination]");
+  const controls = document.querySelector<HTMLElement>("[data-project-pagination-controls]");
+
+  if (paginator && controls) {
+    const pages = Array.from(paginator.querySelectorAll<HTMLElement>("[data-project-page]"));
+    const prev = controls.querySelector<HTMLButtonElement>("[data-project-prev]");
+    const next = controls.querySelector<HTMLButtonElement>("[data-project-next]");
+    const status = controls.querySelector<HTMLElement>("[data-project-status]");
+    let currentPage = 0;
+
+    const setPage = (pageIndex: number) => {
+      currentPage = Math.min(Math.max(pageIndex, 0), pages.length - 1);
+
+      pages.forEach((page, index) => {
+        page.hidden = index !== currentPage;
+      });
+
+      if (prev) prev.disabled = currentPage === 0;
+      if (next) next.disabled = currentPage === pages.length - 1;
+      if (status) status.textContent = `Page ${currentPage + 1} of ${pages.length}`;
+    };
+
+    prev?.addEventListener("click", () => setPage(currentPage - 1));
+    next?.addEventListener("click", () => setPage(currentPage + 1));
+    setPage(0);
+  }
+</script>

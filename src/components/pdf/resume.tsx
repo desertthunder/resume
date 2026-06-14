@@ -4,6 +4,7 @@ import path from "node:path";
 import type { ReactNode } from "react";
 import type { Resume } from "../../types/resume";
 import { formatResumeDate, formatResumeDateRange } from "../../utils/date";
+import { chunk } from "../../utils/collections";
 
 Font.register({
   family: "IBM Plex Serif",
@@ -180,13 +181,16 @@ const urlFor = (
 
 const sanitizeUrl = (uri?: string): string => (uri ? uri.replace(/^https?:\/\//, "") : "");
 
-export default function ResumePdf({ resume }: { resume: Resume }) {
+export default function ResumePdf({ resume, projectPageSize }: { resume: Resume; projectPageSize?: number }) {
   const basics = resume.basics;
   const name = basics?.name ?? "Résumé";
   const year = new Date().getFullYear();
   const profiles = basics?.profiles ?? [];
   const linkedInUrl = urlFor("linkedin", profiles);
   const ghUrl = urlFor("github", profiles);
+  const projects = resume.projects ?? [];
+  const normalizedProjectPageSize = projectPageSize ? Math.max(1, projectPageSize) : Math.max(1, projects.length);
+  const projectPages = chunk(projects, normalizedProjectPageSize);
   return (
     <Document author={name} title={`Résumé for ${name}, ${year}`}>
       <Page size="LETTER" style={styles.page}>
@@ -305,12 +309,12 @@ export default function ResumePdf({ resume }: { resume: Resume }) {
         </View>
       </Page>
 
-      {resume.projects && resume.projects.length > 0 && (
-        <Page size="LETTER" style={styles.projectPage}>
+      {projectPages.map((projectPage, pageIndex) => (
+        <Page key={`projects-${pageIndex}`} size="LETTER" style={styles.projectPage}>
           <View style={styles.projectPageContent}>
             <View style={styles.section}>
               <SectionHeading>Projects</SectionHeading>
-              {resume.projects.map((project) => (
+              {projectPage.map((project) => (
                 <View key={project.name} style={styles.item} wrap={false}>
                   <Text style={styles.itemHeading}>{project.name}</Text>
                   {project.description &&
@@ -355,7 +359,7 @@ export default function ResumePdf({ resume }: { resume: Resume }) {
             </View>
           </View>
         </Page>
-      )}
+      ))}
     </Document>
   );
 }
