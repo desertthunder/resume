@@ -87,7 +87,20 @@
   "skills": [
     {
       "name": "Languages",
-      "keywords": ["Python", "TypeScript", "JavaScript", "Ruby", "Golang", "SQL", "Rust", "Dart"]
+      "keywords": [
+        "Python",
+        "TypeScript",
+        "JavaScript",
+        "Ruby",
+        "Golang",
+        "SQL",
+        "Rust",
+        "Dart",
+        "Zig",
+        "OCaml",
+        "F#",
+        "Gleam"
+      ]
     },
     {
       "name": "Technologies",
@@ -99,6 +112,7 @@
         "Svelte",
         "Vue",
         "Rails",
+        "Node.js",
         "Docker",
         "Kubernetes",
         "ElasticSearch",
@@ -107,7 +121,7 @@
     },
     {
       "name": "Professional Interests",
-      "keywords": ["Linux", "Software Architecture", "R", "F#", "OCaml", "Mobile Development", "Solid.js", "Compilers"]
+      "keywords": ["Linux", "Software Architecture", "R", "Mobile Development", "Solid.js", "Compilers"]
     }
   ],
   "projects": [
